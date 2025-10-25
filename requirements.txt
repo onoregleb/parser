@@ -4,3 +4,4 @@ pymongo
 PyYAML
 pydantic
 playwright
+requests  # для проверки прокси

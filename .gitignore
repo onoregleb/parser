@@ -36,6 +36,9 @@ screenlog.*
 .env
 .env.local
 
+# Proxies (секретные данные)
+proxies.txt
+
 # Database
 *.db
 *.sqlite
