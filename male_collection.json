@@ -1,0 +1,1060 @@
+[
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/boss--item-32037222.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/32/03/72/22/32037222_61786021_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/03/72/22/32037222_61786025_1000.jpg",
+            "",
+            "",
+            ""
+        ],
+        "price": "$1,513",
+        "short_description": "однобортное пальто",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/barbour-beaufort-item-15651935.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554019_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554018_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554021_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28553587_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554020_1000.jpg"
+        ],
+        "price": "$474",
+        "short_description": "пальто Beaufort на кнопках",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/snow-peak--item-32237013.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106509_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106488_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106492_1000.jpg"
+        ],
+        "price": "$699",
+        "short_description": "пуховик с завязками",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/tom-ford--item-23178482.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697108_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697101_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697097_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697107_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697098_1000.jpg"
+        ],
+        "price": null,
+        "short_description": "пальто с узором в елочку",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/herno--item-13003813.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211752_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211742_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211787_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211804_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211816_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211823_1000.jpg"
+        ],
+        "price": null,
+        "short_description": "прямой пуховик ",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/herno--item-24481126.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866219_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866207_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866217_1000.jpg"
+        ],
+        "price": "$1,146",
+        "short_description": "пуховик с логотипом",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/karl-lagerfeld-classic-item-24048680.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352918_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352910_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352904_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352899_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352900_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352911_1000.jpg"
+        ],
+        "price": null,
+        "short_description": "пальто Classic",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/moorer-imel-item-23870732.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138892_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138890_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138887_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138891_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138874_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138889_1000.jpg"
+        ],
+        "price": null,
+        "short_description": "пуховик Imel",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/boss--item-32037222.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/32/03/72/22/32037222_61786021_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/03/72/22/32037222_61786025_1000.jpg",
+            "",
+            "",
+            ""
+        ],
+        "price": "$1,513",
+        "short_description": "однобортное пальто",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/barbour-beaufort-item-15651935.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554019_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554018_1000.jpg",
+            "",
+            "",
+            ""
+        ],
+        "price": "$474",
+        "short_description": "пальто Beaufort на кнопках",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/snow-peak--item-32237013.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106509_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106488_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106492_1000.jpg"
+        ],
+        "price": "$699",
+        "short_description": "пуховик с завязками",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/tom-ford--item-23178482.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697108_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697101_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697097_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697107_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697098_1000.jpg"
+        ],
+        "price": "$5,933",
+        "short_description": "пальто с узором в елочку",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/herno--item-13003813.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211752_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211742_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211787_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211804_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211816_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211823_1000.jpg"
+        ],
+        "price": "$777",
+        "short_description": "прямой пуховик ",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/canada-goose--item-18883220.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41083060_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41083051_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41083062_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41083056_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41081586_1000.jpg"
+        ],
+        "price": "$1,959",
+        "short_description": "пуховик с капюшоном и нашивкой-логотипом",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/herno--item-24481126.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866219_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866207_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866217_1000.jpg"
+        ],
+        "price": "$1,146",
+        "short_description": "пуховик с логотипом",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/karl-lagerfeld-classic-item-24048680.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352918_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352910_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352904_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352899_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352900_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352911_1000.jpg"
+        ],
+        "price": "$670",
+        "short_description": "пальто Classic",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/canada-goose-macmillan-item-19149565.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42489110_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42488697_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42488699_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42487820_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42488698_1000.jpg"
+        ],
+        "price": "$1,212",
+        "short_description": "парка MacMillan",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/moorer-imel-item-23870732.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138892_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138890_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138887_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138891_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138874_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138889_1000.jpg"
+        ],
+        "price": "$2,726",
+        "short_description": "пуховик Imel",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/boss--item-32037222.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/32/03/72/22/32037222_61786021_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/03/72/22/32037222_61786025_1000.jpg",
+            "",
+            "",
+            ""
+        ],
+        "price": "$1,513",
+        "short_description": "однобортное пальто",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/barbour-beaufort-item-15651935.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554019_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554018_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554021_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28553587_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/65/19/35/15651935_28554020_1000.jpg"
+        ],
+        "price": "$474",
+        "short_description": "пальто Beaufort на кнопках",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/snow-peak--item-32237013.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106509_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106488_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/23/70/13/32237013_62106492_1000.jpg"
+        ],
+        "price": "$699",
+        "short_description": "пуховик с завязками",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/tom-ford--item-23178482.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697108_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697101_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697097_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697107_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/17/84/82/23178482_54697098_1000.jpg"
+        ],
+        "price": "$5,933",
+        "short_description": "пальто с узором в елочку",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/herno--item-13003813.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211752_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211742_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211787_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211804_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211816_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/13/00/38/13/13003813_59211823_1000.jpg"
+        ],
+        "price": "$777",
+        "short_description": "прямой пуховик ",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/canada-goose--item-18883220.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41083060_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41083051_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41083062_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41083056_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/88/32/20/18883220_41081586_1000.jpg"
+        ],
+        "price": "$1,959",
+        "short_description": "пуховик с капюшоном и нашивкой-логотипом",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/herno--item-24481126.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866219_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866207_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/48/11/26/24481126_54866217_1000.jpg"
+        ],
+        "price": "$1,146",
+        "short_description": "пуховик с логотипом",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/karl-lagerfeld-classic-item-24048680.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352918_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352910_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352904_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352899_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352900_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/04/86/80/24048680_54352911_1000.jpg"
+        ],
+        "price": "$670",
+        "short_description": "пальто Classic",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/canada-goose-macmillan-item-19149565.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42489110_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42488697_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42488699_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42487820_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/14/95/65/19149565_42488698_1000.jpg"
+        ],
+        "price": "$1,212",
+        "short_description": "парка MacMillan",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/moorer-imel-item-23870732.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138892_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138890_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138887_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138891_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138874_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/23/87/07/32/23870732_54138889_1000.jpg"
+        ],
+        "price": "$2,726",
+        "short_description": "пуховик Imel",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/stone-island--item-32098725.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/32/09/87/25/32098725_61873100_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/09/87/25/32098725_61873123_1000.jpg"
+        ],
+        "price": "$2,530",
+        "short_description": "пальто с капюшоном",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/stone-island--item-31923443.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/31/92/34/43/31923443_61548237_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/92/34/43/31923443_61548218_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/92/34/43/31923443_61548219_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/92/34/43/31923443_61548203_1000.jpg"
+        ],
+        "price": "$1,832",
+        "short_description": "двубортный шерстяной бушлат",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/cp-company--item-31002983.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/31/00/29/83/31002983_59966577_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/00/29/83/31002983_59966558_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/00/29/83/31002983_59966614_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/00/29/83/31002983_59966599_1000.jpg"
+        ],
+        "price": "$688",
+        "short_description": "пуховик с капюшоном",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/woolrich--item-19976534.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/19/97/65/34/19976534_51710020_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/97/65/34/19976534_51703730_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/97/65/34/19976534_51703728_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/97/65/34/19976534_51703727_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/97/65/34/19976534_51703725_1000.jpg"
+        ],
+        "price": "$1,929",
+        "short_description": "парка с высоким воротником и капюшоном",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/stone-island-david-tc-item-24476934.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/47/69/34/24476934_54612976_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/47/69/34/24476934_54612979_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/47/69/34/24476934_54612975_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/47/69/34/24476934_54612991_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/47/69/34/24476934_54612982_1000.jpg"
+        ],
+        "price": "$1,619",
+        "short_description": "пальто David-TC",
+        "category": "coats",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/boss--item-31605168.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/31/60/51/68/31605168_60928718_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/60/51/68/31605168_60928725_1000.jpg"
+        ],
+        "price": "$127",
+        "short_description": "джинсы с нашивкой",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/who-decides-war--item-32263107.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/32/26/31/07/32263107_62198560_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/32/26/31/07/32263107_62198655_1000.jpg"
+        ],
+        "price": "$269",
+        "short_description": "джинсы с эффектом потертости",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/purple-brand--item-19246080.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/19/24/60/80/19246080_43951294_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/19/24/60/80/19246080_43951293_1000.jpg",
+            "",
+            "",
+            ""
+        ],
+        "price": "$157",
+        "short_description": "узкие джинсы с жатым эффектом",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/purple-brand--item-17425440.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/17/42/54/40/17425440_36893731_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/17/42/54/40/17425440_36892956_1000.jpg",
+            "",
+            "",
+            ""
+        ],
+        "price": "$281",
+        "short_description": "джинсы скинни с эффектом разбрызганной краски",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/levis-502-item-29513932.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/29/51/39/32/29513932_58509550_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/51/39/32/29513932_58509560_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/51/39/32/29513932_58509558_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/51/39/32/29513932_58509559_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/51/39/32/29513932_58509557_1000.jpg"
+        ],
+        "price": "$185",
+        "short_description": "джинсы 502",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/jacob-cohen-bard-item-25617702.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/25/61/77/02/25617702_55713590_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/61/77/02/25617702_55713520_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/61/77/02/25617702_55713552_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/61/77/02/25617702_55713542_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/61/77/02/25617702_55713551_1000.jpg"
+        ],
+        "price": "$920",
+        "short_description": "джинсы Bard",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/purple-brand--item-17984748.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/17/98/47/48/17984748_38069358_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/17/98/47/48/17984748_40328786_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/17/98/47/48/17984748_38069362_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/17/98/47/48/17984748_38069366_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/17/98/47/48/17984748_38068842_1000.jpg"
+        ],
+        "price": "$136",
+        "short_description": "джинсы скинни",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/rick-owens-drkshdw--item-31773565.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/31/77/35/65/31773565_61440222_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/77/35/65/31773565_61233814_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/77/35/65/31773565_61233677_1000.jpg"
+        ],
+        "price": "$640",
+        "short_description": "джинсы с карманами",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/arte-antwerp--item-31502204.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/31/50/22/04/31502204_61272138_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/50/22/04/31502204_61228658_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/50/22/04/31502204_61228692_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/50/22/04/31502204_61228677_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/31/50/22/04/31502204_61228663_1000.jpg"
+        ],
+        "price": "$151",
+        "short_description": "джинсы прямого кроя на пуговицах",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/jacob-cohen--item-29160181.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/29/16/01/81/29160181_58333322_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/16/01/81/29160181_58333341_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/16/01/81/29160181_58333350_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/16/01/81/29160181_58333343_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/16/01/81/29160181_58333340_1000.jpg"
+        ],
+        "price": "$551",
+        "short_description": "джинсы с карманами",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/apc-fergus-item-28188638.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/28/18/86/38/28188638_57748243_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/18/86/38/28188638_57748237_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/18/86/38/28188638_57748238_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/18/86/38/28188638_57748232_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/18/86/38/28188638_57748228_1000.jpg"
+        ],
+        "price": "$231",
+        "short_description": "джинсы Fergus",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/levis-501-item-15691567.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/15/69/15/67/15691567_28664464_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/69/15/67/15691567_28665097_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/69/15/67/15691567_28664465_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/69/15/67/15691567_28665098_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/15/69/15/67/15691567_28665099_1000.jpg"
+        ],
+        "price": "$136",
+        "short_description": "джинсы 501",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/amiri-red-poison-archival-item-24440756.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/44/07/56/24440756_54652191_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/44/07/56/24440756_54652174_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/44/07/56/24440756_54652163_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/44/07/56/24440756_54652160_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/44/07/56/24440756_54652162_1000.jpg"
+        ],
+        "price": "$1,757",
+        "short_description": "джинсы Red Poison Archival",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/amiri-mx1-item-21675850.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/21/67/58/50/21675850_51662461_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/21/67/58/50/21675850_51662464_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/21/67/58/50/21675850_51662450_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/21/67/58/50/21675850_51662447_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/21/67/58/50/21675850_51662460_1000.jpg"
+        ],
+        "price": "$1,116",
+        "short_description": "джинсы скинни MX1 с эффектом потертости",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/nn07-sonny-1866-item-28958197.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/28/95/81/97/28958197_59369910_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/95/81/97/28958197_59314222_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/95/81/97/28958197_59314237_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/95/81/97/28958197_59314208_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/95/81/97/28958197_59314209_1000.jpg"
+        ],
+        "price": "$205",
+        "short_description": "прямые джинсы Sonny 1866",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/jacob-cohen-bard-item-29796000.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/29/79/60/00/29796000_58970138_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/79/60/00/29796000_58970145_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/79/60/00/29796000_58970114_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/79/60/00/29796000_58970137_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/79/60/00/29796000_58970124_1000.jpg"
+        ],
+        "price": "$355",
+        "short_description": "джинсы Bard",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/g-star-raw--item-28695930.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/28/69/59/30/28695930_61759111_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/69/59/30/28695930_61759161_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/69/59/30/28695930_61759199_1000.jpg"
+        ],
+        "price": "$173",
+        "short_description": "вощеные джинсы скинни",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/karl-lagerfeld-jeans--item-26156858.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/26/15/68/58/26156858_56408153_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/15/68/58/26156858_56408157_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/15/68/58/26156858_56408154_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/15/68/58/26156858_56408156_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/15/68/58/26156858_56408155_1000.jpg"
+        ],
+        "price": "$146",
+        "short_description": "прямые джинсы средней посадки",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/our-legacy-first-cut-item-28971384.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/28/97/13/84/28971384_58167962_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/97/13/84/28971384_58168014_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/97/13/84/28971384_58168013_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/97/13/84/28971384_58168015_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/97/13/84/28971384_58168034_1000.jpg"
+        ],
+        "price": "$567",
+        "short_description": "джинсы First Cut",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/dsquared2--item-26933938.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/26/93/39/38/26933938_56988380_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/93/39/38/26933938_56988375_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/93/39/38/26933938_56988377_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/93/39/38/26933938_56988376_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/93/39/38/26933938_56988372_1000.jpg"
+        ],
+        "price": "$735",
+        "short_description": "джинсы с эффектом разбрызганной краски",
+        "category": "denim",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/balenciaga--item-30371958.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/30/37/19/58/30371958_59394899_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/37/19/58/30371958_59394900_1000.jpg"
+        ],
+        "price": "$1,603",
+        "short_description": "многослойная куртка",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/dsquared2--item-27223262.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/27/22/32/62/27223262_62035064_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/27/22/32/62/27223262_62035089_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/27/22/32/62/27223262_62035070_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/27/22/32/62/27223262_62035107_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/27/22/32/62/27223262_62060589_1000.jpg"
+        ],
+        "price": "$2,126",
+        "short_description": "куртка на молнии с узором шеврон",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/boss--item-28612206.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/28/61/22/06/28612206_61079887_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/61/22/06/28612206_61079897_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/61/22/06/28612206_61079891_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/28/61/22/06/28612206_61079915_1000.jpg"
+        ],
+        "price": "$444",
+        "short_description": "куртка на молнии с капюшоном",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/valentino-garavani-vlogo-signature-item-29537738.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/29/53/77/38/29537738_59038971_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/53/77/38/29537738_59038967_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/53/77/38/29537738_59038965_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/53/77/38/29537738_59038957_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/53/77/38/29537738_59038982_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/53/77/38/29537738_59038975_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/53/77/38/29537738_59038980_1000.jpg"
+        ],
+        "price": "$2,275",
+        "short_description": "ветровка с логотипом VLogo Signature",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/cp-company--item-25645359.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/25/64/53/59/25645359_55827179_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/64/53/59/25645359_55827181_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/64/53/59/25645359_55827182_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/64/53/59/25645359_55827159_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/64/53/59/25645359_55827177_1000.jpg"
+        ],
+        "price": "$860",
+        "short_description": "стеганый пуховик",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/our-legacy-inhale-item-25294988.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/25/29/49/88/25294988_55487034_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/29/49/88/25294988_55487050_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/29/49/88/25294988_55487035_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/29/49/88/25294988_55487038_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/29/49/88/25294988_55487032_1000.jpg"
+        ],
+        "price": "$1,473",
+        "short_description": "пуховик Inhale",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/doublet--item-22857764.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/22/85/77/64/22857764_53293029_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/85/77/64/22857764_53293026_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/85/77/64/22857764_53293008_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/85/77/64/22857764_53293007_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/85/77/64/22857764_53293005_1000.jpg"
+        ],
+        "price": "$1,627",
+        "short_description": "шерстяной пиджак с объемными плечами",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/maison-margiela--item-29616916.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/29/61/69/16/29616916_58713990_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/61/69/16/29616916_58714016_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/61/69/16/29616916_58714021_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/61/69/16/29616916_58713999_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/61/69/16/29616916_58714009_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/61/69/16/29616916_58714001_1000.jpg"
+        ],
+        "price": "$2,534",
+        "short_description": "куртка-рубашка со вставками",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/etro--item-22545739.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/22/54/57/39/22545739_52468447_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/54/57/39/22545739_52468446_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/54/57/39/22545739_52468445_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/54/57/39/22545739_52468454_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/54/57/39/22545739_52468444_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/54/57/39/22545739_52468450_1000.jpg"
+        ],
+        "price": "$2,677",
+        "short_description": "бомбер с принтом пейсли и логотипом",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/cp-company--item-18251578.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/18/25/15/78/18251578_39320233_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/25/15/78/18251578_39320262_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/25/15/78/18251578_39319464_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/25/15/78/18251578_39320247_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/18/25/15/78/18251578_39320238_1000.jpg"
+        ],
+        "price": "$462",
+        "short_description": "куртка на молнии с капюшоном ",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/fusalp-ilanox-item-29137568.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/29/13/75/68/29137568_58254664_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/13/75/68/29137568_58254672_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/13/75/68/29137568_58254660_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/13/75/68/29137568_58254669_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/13/75/68/29137568_58254663_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/13/75/68/29137568_58254649_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/29/13/75/68/29137568_58254659_1000.jpg"
+        ],
+        "price": "$1,158",
+        "short_description": "куртка Ilanox",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/plein-sport-global-express-item-20184049.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/20/18/40/49/20184049_52240940_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/20/18/40/49/20184049_52240939_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/20/18/40/49/20184049_52240938_1000.jpg"
+        ],
+        "price": "$790",
+        "short_description": "пуховик Global Express",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/parajumpers-zorba-item-30316159.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/30/31/61/59/30316159_59259596_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/31/61/59/30316159_59259624_1000.jpg"
+        ],
+        "price": "$553",
+        "short_description": "куртка Zorba",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/kenzo--item-24195048.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/19/50/48/24195048_54359706_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/19/50/48/24195048_54359711_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/19/50/48/24195048_54359709_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/19/50/48/24195048_54359713_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/19/50/48/24195048_54359717_1000.jpg"
+        ],
+        "price": "$506",
+        "short_description": "шерстяной пиджак",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/sport-b-by-agnes-b--item-22375750.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/22/37/57/50/22375750_57399561_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/37/57/50/22375750_57399649_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/37/57/50/22375750_57399642_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/37/57/50/22375750_57399630_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/22/37/57/50/22375750_57399553_1000.jpg"
+        ],
+        "price": "$507",
+        "short_description": "пуховик с нашивкой-логотипом",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/moncler-selves-item-27616188.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/27/61/61/88/27616188_57650292_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/27/61/61/88/27616188_57650310_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/27/61/61/88/27616188_57650295_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/27/61/61/88/27616188_57650285_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/27/61/61/88/27616188_57650300_1000.jpg"
+        ],
+        "price": "$1,385",
+        "short_description": "куртка Selves",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/icecream-running-dog-item-30796671.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/30/79/66/71/30796671_60242998_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/79/66/71/30796671_60248426_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/79/66/71/30796671_60243201_1000.jpg"
+        ],
+        "price": "$387",
+        "short_description": "атласный бомбер Running Dog",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/stone-island-compass-item-30919088.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/30/91/90/88/30919088_59929874_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/91/90/88/30919088_59929862_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/91/90/88/30919088_59929879_1000.jpg"
+        ],
+        "price": "$1,156",
+        "short_description": "пуховик с нашивкой Compass",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/napapijri--item-24946057.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/94/60/57/24946057_55219180_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/94/60/57/24946057_55219205_1000.jpg"
+        ],
+        "price": "$510",
+        "short_description": "пуховик на молнии",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/bode-grandstand-item-24437442.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/43/74/42/24437442_58698625_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/43/74/42/24437442_58698619_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/43/74/42/24437442_58698615_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/43/74/42/24437442_58698611_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/43/74/42/24437442_58698609_1000.jpg"
+        ],
+        "price": "$2,051",
+        "short_description": "куртка Grandstand",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/cp-company-gore-g-type-item-25728250.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/25/72/82/50/25728250_55853571_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/72/82/50/25728250_55853637_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/72/82/50/25728250_55853580_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/72/82/50/25728250_55853626_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/72/82/50/25728250_55853610_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/25/72/82/50/25728250_55853591_1000.jpg"
+        ],
+        "price": "$2,213",
+        "short_description": "двусторонняя куртка Gore G-Type",
+        "category": "jackets",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/scotch-soda--item-30301375.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/30/30/13/75/30301375_60144841_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/30/13/75/30301375_60144742_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/30/13/75/30301375_60144777_1000.jpg"
+        ],
+        "price": "$135",
+        "short_description": "рубашка с длинными рукавами",
+        "category": "shirts",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/karl-lagerfeld--item-26777126.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/26/77/71/26/26777126_58450481_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/26/77/71/26/26777126_58450482_1000.jpg"
+        ],
+        "price": "$153",
+        "short_description": "рубашка с контрастным воротником",
+        "category": "shirts",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/cavalli-class--item-30301419.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/30/30/14/19/30301419_60145151_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/30/14/19/30301419_60144869_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/30/30/14/19/30301419_60144864_1000.jpg"
+        ],
+        "price": "$378",
+        "short_description": "рубашка с длинными рукавами",
+        "category": "shirts",
+        "gender": "male"
+    },
+    {
+        "url": "https://www.farfetch.com/kz/shopping/men/allsaints-underground-item-24939802.aspx",
+        "images": [
+            "https://cdn-images.farfetch-contents.com/24/93/98/02/24939802_55194003_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/93/98/02/24939802_55193981_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/93/98/02/24939802_55194009_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/93/98/02/24939802_55194000_1000.jpg",
+            "https://cdn-images.farfetch-contents.com/24/93/98/02/24939802_55193993_1000.jpg"
+        ],
+        "price": "$152",
+        "short_description": "толстовка Underground",
+        "category": "sweaters-knitwear",
+        "gender": "male"
+    }
+]

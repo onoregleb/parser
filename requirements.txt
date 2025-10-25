@@ -1,0 +1,6 @@
+selenium
+pandas
+pymongo
+PyYAML
+pydantic
+playwright

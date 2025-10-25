@@ -1,0 +1,24 @@
+page_loading_time: 3
+male:
+  url: https://www.farfetch.com/kz/shopping/men/{category}-2/items.aspx
+  categories:
+    # - activewear
+    # - coats
+    - denim
+    - jackets
+    - shorts
+    - shirts
+    - sweaters-knitwear
+    - trousers
+    - t-shirts-vests
+female:
+  url: https://www.farfetch.com/kz/shopping/women/{category}-1/items.aspx
+  categories:
+    # - activewear
+    - coats
+    - denim
+    - dresses
+    - jackets
+    - skirts
+    - tops
+    - trousers
