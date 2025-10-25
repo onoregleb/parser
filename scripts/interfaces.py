@@ -27,7 +27,7 @@ class MongoInterface:
         try:
             collection.insert_one(data_sample)
         except DuplicateKeyError as exc:
-            print(f"URL: {data_sample["url"]} уже добавлен в базу")
+            print(f"URL: {data_sample['url']} уже добавлен в базу")
 
 
 class WebDriverInterface:
