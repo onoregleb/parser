@@ -118,13 +118,15 @@ class PlaywrightInterface:
         self.page.set_default_timeout(30000)             # 30 секунд для локаторов
         self.page.set_default_navigation_timeout(60000) # 60 секунд для goto
 
-    def safe_goto(self, url):
+    def safe_goto(self, url, add_delay=True):
         """Переход на страницу с retry и обработкой баннеров"""
         # Случайная задержка перед запросом (против rate limiting)
-        import random
-        delay = random.uniform(2, 5)  # 2-5 секунд случайной задержки
-        print(f"⏳ Задержка {delay:.1f}s перед запросом...")
-        time.sleep(delay)
+        # Только для страниц каталога, не для карточек товаров
+        if add_delay and "items.aspx" in url:
+            import random
+            delay = random.uniform(1, 2)  # 1-2 секунды для страниц каталога
+            print(f"⏳ Задержка {delay:.1f}s перед запросом...")
+            time.sleep(delay)
         
         max_retries = 3
         for attempt in range(max_retries):
@@ -204,8 +206,13 @@ class PlaywrightInterface:
 
     def parse_elements(self, links, category, gender):
         data = []
-        for link in links:
-            if not self.safe_goto(link):
+        for i, link in enumerate(links):
+            # Небольшая задержка между товарами (0.5-1 сек)
+            if i > 0:
+                import random
+                time.sleep(random.uniform(0.5, 1))
+            
+            if not self.safe_goto(link, add_delay=False):
                 continue
             try:
                 # Получаем изображения
