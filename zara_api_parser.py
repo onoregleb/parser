@@ -29,11 +29,19 @@ class ZaraAPIParser:
         self.items_limit = items_limit
         self.session = requests.Session()
         
-        # User-Agent для имитации браузера
+        # User-Agent и заголовки для имитации браузера
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
             'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Connection': 'keep-alive',
+            'Sec-Ch-Ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+            'Sec-Ch-Ua-Mobile': '?0',
+            'Sec-Ch-Ua-Platform': '"Windows"',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-origin',
             'Referer': 'https://www.zara.com/',
         })
         
@@ -41,6 +49,22 @@ class ZaraAPIParser:
         """Случайная задержка между запросами"""
         delay = random.uniform(self.request_delay[0], self.request_delay[1])
         time.sleep(delay)
+    
+    def _initialize_session(self, country: str, lang: str):
+        """Получает cookies от главной страницы перед API запросами"""
+        base_url = f"https://www.zara.com/{country}/{lang}/"
+        try:
+            print(f"🍪 Получение cookies от {base_url}...", flush=True)
+            response = self.session.get(base_url, timeout=10)
+            if response.status_code == 200:
+                print("✅ Cookies получены", flush=True)
+                return True
+            else:
+                print(f"⚠️ Статус получения cookies: {response.status_code}", flush=True)
+                return False
+        except Exception as e:
+            print(f"⚠️ Ошибка получения cookies: {e}", flush=True)
+            return False
     
     def get_category_products(self, country: str, lang: str, category_id: str) -> List[Dict]:
         """
@@ -54,13 +78,22 @@ class ZaraAPIParser:
         Returns:
             Список товаров с базовой информацией
         """
-        print(f"\n🔍 Получение товаров из категории {category_id}...")
+        print(f"\n🔍 Получение товаров из категории {category_id}...", flush=True)
+        
+        # Сначала получаем cookies от главной страницы
+        self._initialize_session(country, lang)
+        
+        # Добавляем задержку перед API запросом
+        time.sleep(random.uniform(1, 2))
         
         # API эндпоинт для получения товаров категории
         api_url = f"https://www.zara.com/{country}/{lang}/category/{category_id}/products"
         
+        # Обновляем Referer для конкретной страны
+        self.session.headers['Referer'] = f"https://www.zara.com/{country}/{lang}/"
+        
         try:
-            response = self.session.get(api_url, params={'ajax': 'true'})
+            response = self.session.get(api_url, params={'ajax': 'true'}, timeout=15)
             response.raise_for_status()
             data = response.json()
             
@@ -81,19 +114,37 @@ class ZaraAPIParser:
                         commercial_components = item.get('commercialComponents', [])
                         
                         for product in commercial_components:
-                            all_products.append(product)
+                            # ФИЛЬТРУЕМ: берем только реальные товары, пропускаем баннеры
+                            product_type = product.get('type', '')
+                            product_kind = product.get('kind', '')
+                            
+                            # Пропускаем маркетинговые элементы и баннеры
+                            if product_type == 'Product' and product_kind != 'Marketing':
+                                all_products.append(product)
+                            elif product_type == 'Bundle' or product_kind == 'Marketing':
+                                print(f"   ⏭️  Пропускаем маркетинговый элемент: {product_type}/{product_kind}", flush=True)
             
-            print(f"✅ Найдено {len(all_products)} товаров")
+            print(f"✅ Найдено {len(all_products)} товаров (после фильтрации)", flush=True)
             
             # Ограничиваем количество если нужно
             if self.items_limit:
                 all_products = all_products[:self.items_limit]
-                print(f"📊 Ограничено до {len(all_products)} товаров")
+                print(f"📊 Ограничено до {len(all_products)} товаров", flush=True)
             
             return all_products
             
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 403:
+                print(f"❌ 403 Forbidden - Zara заблокировала запрос", flush=True)
+                print(f"💡 Возможные решения:", flush=True)
+                print(f"   1. Используйте VPN или прокси", flush=True)
+                print(f"   2. Увеличьте задержку между запросами", flush=True)
+                print(f"   3. Попробуйте другую страну/язык", flush=True)
+            else:
+                print(f"❌ HTTP ошибка: {e}", flush=True)
+            return []
         except Exception as e:
-            print(f"❌ Ошибка получения товаров: {e}")
+            print(f"❌ Ошибка получения товаров: {e}", flush=True)
             return []
     
     def get_product_details(self, country: str, lang: str, product_id: int) -> Optional[Dict]:
@@ -148,10 +199,20 @@ class ZaraAPIParser:
             Словарь с информацией о товаре
         """
         try:
+            # Проверяем что это действительно товар, а не баннер
+            if product_data.get('type') != 'Product':
+                print(f"   ⏭️  Пропускаем не-товар: type={product_data.get('type')}", flush=True)
+                return {}
+            
+            # Пропускаем маркетинговые элементы
+            if product_data.get('kind') == 'Marketing':
+                print(f"   ⏭️  Пропускаем маркетинговый элемент", flush=True)
+                return {}
+            
             # Базовая информация
             product_id = product_data.get('id')
             name = product_data.get('name', '')
-            price = product_data.get('price', 0) / 100  # Цена в копейках, делим на 100
+            price = product_data.get('price', 0) / 100 if product_data.get('price') else 0  # Цена в копейках, делим на 100
             reference = product_data.get('reference', '')
             section_name = product_data.get('sectionName', '')
             family_name = product_data.get('familyName', '')
@@ -229,10 +290,10 @@ class ZaraAPIParser:
         Returns:
             Список спарсенных товаров
         """
-        print(f"\n{'='*70}")
-        print(f"🛍️  ПАРСИНГ КАТЕГОРИИ: {category_name}")
-        print(f"🔗 URL: {category_url}")
-        print(f"{'='*70}\n")
+        print(f"\n{'='*70}", flush=True)
+        print(f"🛍️  ПАРСИНГ КАТЕГОРИИ: {category_name}", flush=True)
+        print(f"🔗 URL: {category_url}", flush=True)
+        print(f"{'='*70}\n", flush=True)
         
         # Извлекаем параметры из URL
         # Формат: https://www.zara.com/{country}/{lang}/man-jackets-l{category_id}.html?v1={version}
@@ -244,34 +305,37 @@ class ZaraAPIParser:
             # Извлекаем category_id из части URL (например, "man-jackets-l640.html" -> "640")
             category_part = parts[2].split('?')[0]  # Убираем параметры, получаем: man-jackets-l640.html
             
-            # Извлекаем ID между "-l" и ".html"
-            if '-l' in category_part:
-                category_id = category_part.split('-l')[1].split('.')[0]  # 640
+            # ВАЖНО: используем параметр v1 как основной category_id (это правильный ID)
+            if '?v1=' in category_url:
+                category_id = category_url.split('?v1=')[1].split('&')[0]
+            elif '-l' in category_part:
+                # Fallback: извлекаем из URL
+                category_id = category_part.split('-l')[1].split('.')[0]
             else:
-                # Если формат другой, пробуем взять из параметра v1
-                category_id = category_url.split('?v1=')[1].split('&')[0] if '?v1=' in category_url else None
+                print(f"❌ Не удалось извлечь category_id из URL", flush=True)
+                return []
             
-            print(f"📍 Страна: {country}, Язык: {lang}, ID категории: {category_id}")
+            print(f"📍 Страна: {country}, Язык: {lang}, ID категории: {category_id}", flush=True)
             
         except Exception as e:
-            print(f"❌ Не удалось распарсить URL: {e}")
+            print(f"❌ Не удалось распарсить URL: {e}", flush=True)
             return []
         
         # Получаем список товаров
         products = self.get_category_products(country, lang, category_id)
         
         if not products:
-            print("\n⚠️ Товары не найдены")
+            print("\n⚠️ Товары не найдены", flush=True)
             return []
         
         # Парсим каждый товар
-        print(f"\n📦 Парсинг {len(products)} товаров...")
-        print("="*70)
+        print(f"\n📦 Парсинг {len(products)} товаров...", flush=True)
+        print("="*70, flush=True)
         
         parsed_products = []
         
         for i, product_data in enumerate(products, 1):
-            print(f"\n[{i}/{len(products)}] Парсинг товара...")
+            print(f"\n[{i}/{len(products)}] Парсинг товара...", flush=True)
             
             # Добавляем задержку между запросами (кроме первого)
             if i > 1:
@@ -282,16 +346,16 @@ class ZaraAPIParser:
             if parsed:
                 parsed['category'] = category_name
                 parsed_products.append(parsed)
-                print(f"✅ {parsed['name']}")
-                print(f"   💰 Цена: {parsed['price']} {parsed['currency']}")
-                print(f"   🎨 Цвет: {parsed['color']}")
-                print(f"   🔗 URL: {parsed['url'][:80]}...")
+                print(f"✅ {parsed['name']}", flush=True)
+                print(f"   💰 Цена: {parsed['price']} {parsed['currency']}", flush=True)
+                print(f"   🎨 Цвет: {parsed['color']}", flush=True)
+                print(f"   🔗 URL: {parsed['url'][:80]}...", flush=True)
             else:
-                print(f"⚠️ Ошибка парсинга")
+                print(f"⚠️ Пропущен (не является товаром или ошибка)", flush=True)
         
-        print(f"\n{'='*70}")
-        print(f"✅ ЗАВЕРШЕНО: Спарсено {len(parsed_products)} товаров")
-        print(f"{'='*70}")
+        print(f"\n{'='*70}", flush=True)
+        print(f"✅ ЗАВЕРШЕНО: Спарсено {len(parsed_products)} товаров", flush=True)
+        print(f"{'='*70}", flush=True)
         
         return parsed_products
 
