@@ -38,7 +38,10 @@ def run_scrapper(config: Config, gender: str):
     print(f"Chosen catalog: {gender}")
 
     driver = PlaywrightInterface(page_loading_time=config.page_loading_time)
-    mongo = MongoInterface("mongodb://admin123:password123@localhost:27017/")
+    # Используем 'mongo' как имя хоста в Docker, 'localhost' для локального запуска
+    import os
+    mongo_host = os.getenv("MONGO_HOST", "localhost")
+    mongo = MongoInterface(f"mongodb://admin123:password123@{mongo_host}:27017/")
     
     try:
         mongo.create_collection(f"{gender}_collection")
