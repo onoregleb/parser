@@ -26,3 +26,29 @@ class Config(BaseModel):
             data = yaml.safe_load(file)
 
         return Config.model_validate(data)
+
+
+class ZaraCatalog(BaseModel):
+    url: str = Field(..., description="URL of catalog")
+    categories: List[str] = Field(..., description="List of category URLs with parameters")
+
+    @property
+    def urls(self):
+        # Для Zara категории уже содержат полный путь (например: man-jackets-l640.html?v1=2536906)
+        return [self.url.format(category=cat) for cat in self.categories]
+
+
+class ZaraConfig(BaseModel):
+    page_loading_time: int = Field(..., description="Time to load page before parsing goods")
+    request_delay_min: int = Field(24, description="Minimum delay between requests in seconds")
+    request_delay_max: int = Field(60, description="Maximum delay between requests in seconds")
+    items_limit: int = Field(200, description="Limit of items to parse per category")
+    male: ZaraCatalog = Field(..., description="Male catalog information")
+    female: ZaraCatalog = Field(..., description="Female catalog information")
+
+    @classmethod
+    def from_yaml(cls, path_to_config: str) -> "ZaraConfig":
+        with open(path_to_config, "r") as file:
+            data = yaml.safe_load(file)
+
+        return ZaraConfig.model_validate(data)

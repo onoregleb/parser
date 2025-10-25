@@ -1,0 +1,80 @@
+version: "3.9"
+
+services:
+  mongo-zara:
+    image: mongo:7.0
+    container_name: zara-mongo
+    restart: unless-stopped
+    ports:
+      - "27018:27017"  # Используем другой порт, чтобы не конфликтовать с Farfetch
+    environment:
+      MONGO_INITDB_DATABASE: zara_db
+      MONGO_INITDB_ROOT_USERNAME: admin123
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    volumes:
+      - mongo_zara_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - zara-network
+
+  zara-parser-male:
+    build:
+      context: .
+      dockerfile: Dockerfile.zara
+    container_name: zara-parser-male
+    depends_on:
+      mongo-zara:
+        condition: service_healthy
+    environment:
+      - MONGO_HOST=mongo-zara
+      - PYTHONUNBUFFERED=1
+    command: python -u main_zara.py --gender male
+    volumes:
+      - ./zara_male_collection.json:/app/zara_male_collection.json
+      - ./config:/app/config:ro
+    restart: "no"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - zara-network
+
+  zara-parser-female:
+    build:
+      context: .
+      dockerfile: Dockerfile.zara
+    container_name: zara-parser-female
+    depends_on:
+      mongo-zara:
+        condition: service_healthy
+    environment:
+      - MONGO_HOST=mongo-zara
+      - PYTHONUNBUFFERED=1
+    command: python -u main_zara.py --gender female
+    volumes:
+      - ./zara_female_collection.json:/app/zara_female_collection.json
+      - ./config:/app/config:ro
+    restart: "no"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - zara-network
+    profiles:
+      - female  # Отключить по умолчанию, запускать через --profile female
+
+volumes:
+  mongo_zara_data:
+
+networks:
+  zara-network:
+    driver: bridge
+

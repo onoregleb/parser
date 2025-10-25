@@ -1,0 +1,33 @@
+page_loading_time: 3
+request_delay_min: 24
+request_delay_max: 60
+items_limit: 200  # Лимит товаров на категорию
+
+male:
+  url: https://www.zara.com/kz/en/{category}
+  categories:
+    - man-jackets-l640.html?v1=2536906
+    - man-trousers-l1333.html?v1=2536906
+    - man-jeans-l4272.html?v1=2536906
+    - man-t-shirts-l855.html?v1=2536906
+    - man-shirts-l745.html?v1=2536906
+    - man-hoodies-sweatshirts-l1245.html?v1=2536906
+    - man-sweaters-cardigans-l1337.html?v1=2536906
+    - man-blazers-l1245.html?v1=2536906
+    - man-coats-trench-coats-l1246.html?v1=2536906
+    - man-leather-l652.html?v1=2536906
+
+female:
+  url: https://www.zara.com/kz/en/{category}
+  categories:
+    - woman-jackets-l1055.html?v1=2536906
+    - woman-coats-trench-coats-l1152.html?v1=2536906
+    - woman-blazers-l1010.html?v1=2536906
+    - woman-dresses-l1066.html?v1=2536906
+    - woman-tops-l1362.html?v1=2536906
+    - woman-jeans-l1119.html?v1=2536906
+    - woman-trousers-l1335.html?v1=2536906
+    - woman-t-shirts-l1362.html?v1=2536906
+    - woman-shirts-l1217.html?v1=2536906
+    - woman-cardigans-jumpers-l1152.html?v1=2536906
+
