@@ -40,8 +40,8 @@ class ZaraCatalog(BaseModel):
 
 class ZaraConfig(BaseModel):
     page_loading_time: int = Field(..., description="Time to load page before parsing goods")
-    request_delay_min: int = Field(24, description="Minimum delay between requests in seconds")
-    request_delay_max: int = Field(60, description="Maximum delay between requests in seconds")
+    request_delay_min: float = Field(0.5, description="Minimum delay between requests in seconds")
+    request_delay_max: float = Field(1.5, description="Maximum delay between requests in seconds")
     items_limit: int = Field(200, description="Limit of items to parse per category")
     male: ZaraCatalog = Field(..., description="Male catalog information")
     female: ZaraCatalog = Field(..., description="Female catalog information")
