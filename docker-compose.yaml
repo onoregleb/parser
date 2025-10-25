@@ -12,7 +12,50 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin123
       MONGO_INITDB_ROOT_PASSWORD: password123
     volumes:
-      - ./mongo_data:/data/db
+      - mongo_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  parser-male:
+    build: .
+    container_name: farfetch-parser-male
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      - MONGO_HOST=mongo
+    command: python main.py --gender male
+    volumes:
+      - ./male_collection.json:/app/male_collection.json
+      - ./config:/app/config:ro
+    restart: "no"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  parser-female:
+    build: .
+    container_name: farfetch-parser-female
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      - MONGO_HOST=mongo
+    command: python main.py --gender female
+    volumes:
+      - ./female_collection.json:/app/female_collection.json
+      - ./config:/app/config:ro
+    restart: "no"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   mongo_data:
