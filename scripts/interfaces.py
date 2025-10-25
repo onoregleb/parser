@@ -120,13 +120,23 @@ class PlaywrightInterface:
 
     def safe_goto(self, url):
         """Переход на страницу с retry и обработкой баннеров"""
+        # Случайная задержка перед запросом (против rate limiting)
+        import random
+        delay = random.uniform(2, 5)  # 2-5 секунд случайной задержки
+        print(f"⏳ Задержка {delay:.1f}s перед запросом...")
+        time.sleep(delay)
+        
         max_retries = 3
         for attempt in range(max_retries):
             try:
                 response = self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
                 
                 # Проверяем статус ответа
-                if response and response.status >= 400:
+                if response and response.status == 429:
+                    print(f"🚫 Rate limit! Ждем 60 секунд...")
+                    time.sleep(60)
+                    return False
+                elif response and response.status >= 400:
                     print(f"⚠️ HTTP ошибка {response.status}")
                     return False
                 
