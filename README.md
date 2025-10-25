@@ -7,13 +7,18 @@
 ### Быстрый старт
 
 ```bash
-# 1. Собрать и запустить все сервисы (MongoDB + 2 парсера)
+# Способ 1: Использовать скрипт (решает проблемы с правами доступа)
+chmod +x docker-build-fix.sh
+./docker-build-fix.sh
+docker-compose up -d
+
+# Способ 2: Обычная сборка и запуск
 docker-compose up --build
 
-# 2. Запуск в фоновом режиме
+# Запуск в фоновом режиме
 docker-compose up -d --build
 
-# 3. Остановка
+# Остановка
 docker-compose down
 ```
 
@@ -171,6 +176,28 @@ docker exec -it farfetch-mongo mongosh -u admin123 -p password123 farfetch_db \
 ```
 
 ## ❗ Troubleshooting
+
+### Ошибка "permission denied" при сборке образа
+Если при выполнении `docker-compose up --build` возникает ошибка:
+```
+ERROR: failed to solve: error from sender: open /path/to/mongo_data/.mongodb: permission denied
+```
+
+**Решение:**
+```bash
+# Вариант 1: Временно переместить mongo_data
+mv mongo_data mongo_data.backup
+docker-compose up --build
+# После успешной сборки можно вернуть данные
+# mv mongo_data.backup mongo_data
+
+# Вариант 2: Очистить Docker build cache
+docker builder prune -a
+
+# Вариант 3: Проверить .dockerignore
+cat .dockerignore | grep mongo_data
+# Должно быть: mongo_data, mongo_data/, mongo_data/**
+```
 
 ### Ошибка "Cannot connect to MongoDB"
 ```bash

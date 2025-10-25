@@ -40,9 +40,11 @@ screenlog.*
 *.db
 *.sqlite
 mongo_data/
+mongo_data.backup/
 
 # Docker
 .dockerignore
+docker-build-fix.sh
 
 # Other
 *.deb
