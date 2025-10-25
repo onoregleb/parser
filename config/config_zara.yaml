@@ -1,6 +1,7 @@
-page_loading_time: 5
-request_delay_min: 45
-request_delay_max: 90
+# Конфигурация для API парсера (БЕЗ Playwright)
+page_loading_time: 0  # Не используется для API
+request_delay_min: 0.5  # Минимальная задержка между запросами (секунды)
+request_delay_max: 1.5  # Максимальная задержка между запросами (секунды)
 items_limit: 200  # Лимит товаров на категорию
 
 male:
