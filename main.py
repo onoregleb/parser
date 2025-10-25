@@ -35,18 +35,26 @@ def save_to_file(filepath: str, data):
 
 
 def run_scrapper(config: Config, gender: str):
-    print(f"Chosen catalog: {gender}")
+    print(f"🚀 Starting parser for: {gender}", flush=True)
+    print(f"⏰ Timestamp: {__import__('datetime').datetime.now()}", flush=True)
 
+    print("🌐 Initializing Playwright browser...", flush=True)
     driver = PlaywrightInterface(page_loading_time=config.page_loading_time)
+    print("✅ Browser initialized", flush=True)
+    
     # Используем 'mongo' как имя хоста в Docker, 'localhost' для локального запуска
     import os
     mongo_host = os.getenv("MONGO_HOST", "localhost")
+    print(f"🔌 Connecting to MongoDB at {mongo_host}:27017...", flush=True)
     mongo = MongoInterface(f"mongodb://admin123:password123@{mongo_host}:27017/")
+    print("✅ MongoDB connected", flush=True)
     
     try:
+        print(f"📁 Creating collection: {gender}_collection", flush=True)
         mongo.create_collection(f"{gender}_collection")
-    except:
-        pass
+        print("✅ Collection created", flush=True)
+    except Exception as e:
+        print(f"ℹ️ Collection already exists or error: {e}", flush=True)
 
     urls = getattr(config, gender).urls
     categories = getattr(config, gender).categories

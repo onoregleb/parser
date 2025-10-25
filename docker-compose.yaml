@@ -27,7 +27,8 @@ services:
         condition: service_healthy
     environment:
       - MONGO_HOST=mongo
-    command: python main.py --gender male
+      - PYTHONUNBUFFERED=1
+    command: python -u main.py --gender male
     volumes:
       - ./male_collection.json:/app/male_collection.json
       - ./config:/app/config:ro
@@ -46,7 +47,8 @@ services:
         condition: service_healthy
     environment:
       - MONGO_HOST=mongo
-    command: python main.py --gender female
+      - PYTHONUNBUFFERED=1
+    command: python -u main.py --gender female
     volumes:
       - ./female_collection.json:/app/female_collection.json
       - ./config:/app/config:ro
