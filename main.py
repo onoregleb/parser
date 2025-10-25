@@ -39,6 +39,7 @@ def run_scrapper(config: Config, gender: str):
 
     driver = PlaywrightInterface(page_loading_time=config.page_loading_time)
     mongo = MongoInterface("mongodb://admin123:password123@localhost:27017/")
+    
     try:
         mongo.create_collection(f"{gender}_collection")
     except:
@@ -46,25 +47,51 @@ def run_scrapper(config: Config, gender: str):
 
     urls = getattr(config, gender).urls
     categories = getattr(config, gender).categories
-    for url, category in zip(urls, categories):
-        print(f"Parsing category: {category}")
-        try:
-            pages = driver.get_number_of_pages(url=url)
-        except Exception as exc:
-            print(f"Error in parsing pages: {url}\n", str(exc))
-            print()
-            continue
-        print("pages: ", pages)
-        for page in range(1, pages + 1):
-            url_page = f"{url}?page={page}"
-            print(f"Parsing: {url_page} out of {pages}")
+    
+    try:
+        for url, category in zip(urls, categories):
+            print(f"\n{'='*50}")
+            print(f"Parsing category: {category}")
+            print(f"{'='*50}")
+            try:
+                pages = driver.get_number_of_pages(url=url)
+            except Exception as exc:
+                print(f"Error in parsing pages: {url}\n", str(exc))
+                print()
+                continue
+            print(f"Всего страниц: {pages}")
+            
+            # Счетчик пустых страниц подряд
+            consecutive_empty_pages = 0
+            max_consecutive_empty = 5  # Остановиться после 5 пустых страниц подряд
+            
+            for page in range(1, pages + 1):
+                url_page = f"{url}?page={page}"
+                print(f"\n[{page}/{pages}] Parsing: {url_page}")
 
-            links = driver.get_elements(url=url_page)
-            parsed_data = driver.parse_elements(links, category, gender)
+                links = driver.get_elements(url=url_page)
+                
+                # Проверка на пустую страницу
+                if not links:
+                    consecutive_empty_pages += 1
+                    print(f"⚠️ Пустая страница ({consecutive_empty_pages}/{max_consecutive_empty})")
+                    if consecutive_empty_pages >= max_consecutive_empty:
+                        print(f"❌ Остановка парсинга категории {category}: {max_consecutive_empty} пустых страниц подряд")
+                        break
+                    continue
+                else:
+                    consecutive_empty_pages = 0  # Сброс счетчика при успешной загрузке
+                
+                parsed_data = driver.parse_elements(links, category, gender)
 
-            save_to_file(f"{gender}_collection.json", parsed_data)
-            save_to_mongo(mongo, f"{gender}_collection", parsed_data)
-            print("----------------------")
+                save_to_file(f"{gender}_collection.json", parsed_data)
+                save_to_mongo(mongo, f"{gender}_collection", parsed_data)
+                print(f"✓ Сохранено {len(parsed_data)} товаров")
+                print("-" * 50)
+    finally:
+        # Закрываем браузер в любом случае
+        driver.close()
+        print("\n✓ Парсинг завершен, браузер закрыт")
 
 
 if __name__ == "__main__":

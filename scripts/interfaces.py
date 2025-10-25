@@ -120,26 +120,43 @@ class PlaywrightInterface:
 
     def safe_goto(self, url):
         """Переход на страницу с retry и обработкой баннеров"""
-        for attempt in range(5):
+        max_retries = 3
+        for attempt in range(max_retries):
             try:
-                self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
+                response = self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
+                
+                # Проверяем статус ответа
+                if response and response.status >= 400:
+                    print(f"⚠️ HTTP ошибка {response.status}")
+                    return False
+                
+                # Проверяем, что не произошел редирект на главную или другую страницу
+                current_url = self.page.url
+                if "items.aspx" not in current_url and "page=" in url:
+                    print(f"⚠️ Редирект обнаружен: {current_url}")
+                    return False
+                
+                # Проверяем, что страница не пустая и содержит контент
                 self.page.wait_for_selector(
                     '[data-component="PriceCallout"], [data-testid="productCard"], [data-component="PaginationLabel"]',
-                    timeout=40000
+                    timeout=15000  # Уменьшен таймаут для быстрого обнаружения пустых страниц
                 )
 
-                # Закрываем pop-up / куки
-                for btn_text in ["Accept All", "Continue"]:
-                    try:
-                        self.page.locator(f'button:has-text("{btn_text}")').click(timeout=2000)
-                    except:
-                        pass
+                # Закрываем pop-up / куки только при первой загрузке
+                if attempt == 0:
+                    for btn_text in ["Accept All", "Continue", "Принять"]:
+                        try:
+                            self.page.locator(f'button:has-text("{btn_text}")').click(timeout=2000)
+                        except:
+                            pass
 
                 return True
             except Exception as e:
-                print(f"⚠️ Попытка {attempt+1}/3 не удалась ({url}): {e}")
-                time.sleep(2)
-        print(f"❌ Не удалось загрузить {url}")
+                if attempt < max_retries - 1:
+                    print(f"⚠️ Попытка {attempt+1}/{max_retries} не удалась: {type(e).__name__}")
+                    time.sleep(3 * (attempt + 1))  # Увеличиваем задержку с каждой попыткой
+                else:
+                    print(f"❌ Не удалось загрузить: {type(e).__name__}")
         return False
 
     def get_number_of_pages(self, url: str):
@@ -158,11 +175,21 @@ class PlaywrightInterface:
         if not self.safe_goto(url):
             return []
         try:
+            # Ждем появления каталога
+            self.page.wait_for_selector('#catalog-grid', timeout=10000)
             catalog_links = self.page.locator('#catalog-grid [data-component="ProductCardLink"]')
+            
+            # Проверяем, есть ли вообще карточки товаров
+            count = catalog_links.count()
+            if count == 0:
+                print(f"⚠️ Страница не содержит товаров")
+                return []
+            
             hrefs = catalog_links.evaluate_all("els => els.map(e => e.href)")
+            print(f"✓ Найдено {len(hrefs)} товаров на странице")
             return hrefs or []
         except Exception as exc:
-            print(f"⚠️ Ошибка при получении ссылок {url}: {exc}")
+            print(f"⚠️ Ошибка при получении ссылок: {type(exc).__name__}")
             return []
 
     def parse_elements(self, links, category, gender):
