@@ -242,12 +242,14 @@ class ZaraAPIParser:
             lang = parts[1]     # en
             
             # Извлекаем category_id из части URL (например, "man-jackets-l640.html" -> "640")
-            category_part = parts[2]  # man-jackets-l640.html
-            category_id = category_part.split('-l')[1].split('.')[0]  # 640
+            category_part = parts[2].split('?')[0]  # Убираем параметры, получаем: man-jackets-l640.html
             
-            # Можно также получить из параметра v1
-            if '?v1=' in category_url:
-                category_id = category_url.split('?v1=')[1].split('&')[0]
+            # Извлекаем ID между "-l" и ".html"
+            if '-l' in category_part:
+                category_id = category_part.split('-l')[1].split('.')[0]  # 640
+            else:
+                # Если формат другой, пробуем взять из параметра v1
+                category_id = category_url.split('?v1=')[1].split('&')[0] if '?v1=' in category_url else None
             
             print(f"📍 Страна: {country}, Язык: {lang}, ID категории: {category_id}")
             
