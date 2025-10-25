@@ -312,15 +312,61 @@ class ZaraPlaywrightInterface:
         self._init_browser(headless)
 
     def _init_browser(self, headless: bool = True):
-        """Инициализация браузера"""
-        self.browser = self.playwright.chromium.launch(headless=headless)
+        """Инициализация браузера с продвинутыми настройками против блокировки"""
+        # Запускаем браузер с дополнительными аргументами
+        self.browser = self.playwright.chromium.launch(
+            headless=headless,
+            args=[
+                '--disable-blink-features=AutomationControlled',
+                '--disable-features=IsolateOrigins,site-per-process',
+                '--disable-site-isolation-trials',
+            ]
+        )
         
-        # Имитируем реальный браузер
-        self.page = self.browser.new_page(user_agent=(
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/120.0.0.0 Safari/537.36"
-        ))
+        # Создаем контекст с реалистичными параметрами
+        context = self.browser.new_context(
+            viewport={'width': 1920, 'height': 1080},
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/131.0.0.0 Safari/537.36"
+            ),
+            locale='en-US',
+            timezone_id='Asia/Almaty',
+            extra_http_headers={
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'DNT': '1',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Sec-Fetch-User': '?1',
+            }
+        )
+        
+        self.page = context.new_page()
+        
+        # Скрываем признаки автоматизации
+        self.page.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => undefined
+            });
+            
+            Object.defineProperty(navigator, 'plugins', {
+                get: () => [1, 2, 3, 4, 5]
+            });
+            
+            Object.defineProperty(navigator, 'languages', {
+                get: () => ['en-US', 'en', 'ru']
+            });
+            
+            window.chrome = {
+                runtime: {}
+            };
+        """)
 
         # Таймауты
         self.page.set_default_timeout(30000)
@@ -338,12 +384,25 @@ class ZaraPlaywrightInterface:
         
         for attempt in range(max_retries):
             try:
-                response = self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
+                response = self.page.goto(url, wait_until="networkidle", timeout=60000)
                 
                 # Проверяем статус ответа
-                if response and response.status == 429:
-                    print(f"🚫 Rate limit (429)! Ждем 60 секунд...")
-                    time.sleep(60)
+                if response and response.status == 403:
+                    print(f"🚫 Ошибка 403 (Forbidden)! Попытка {attempt+1}/{max_retries}")
+                    if attempt < max_retries - 1:
+                        wait_time = 60 * (attempt + 1)
+                        print(f"⏱️ Ждем {wait_time} секунд перед следующей попыткой...")
+                        time.sleep(wait_time)
+                        continue
+                    else:
+                        print(f"❌ Доступ заблокирован. Попробуйте:")
+                        print(f"   1. Использовать proxy")
+                        print(f"   2. Увеличить задержки в config_zara.yaml")
+                        print(f"   3. Парсить в другое время")
+                        return False
+                elif response and response.status == 429:
+                    print(f"🚫 Rate limit (429)! Ждем 90 секунд...")
+                    time.sleep(90)
                     continue
                 elif response and response.status >= 400:
                     print(f"⚠️ HTTP ошибка {response.status}")
@@ -351,6 +410,14 @@ class ZaraPlaywrightInterface:
                 
                 # Ждем загрузки контента
                 time.sleep(self.page_loading_time)
+                
+                # Имитируем человеческое поведение - небольшие движения мыши
+                try:
+                    self.page.mouse.move(100, 100)
+                    time.sleep(0.5)
+                    self.page.mouse.move(300, 400)
+                except:
+                    pass
 
                 # Закрываем cookie banner при первой загрузке
                 if attempt == 0:
@@ -358,6 +425,7 @@ class ZaraPlaywrightInterface:
                         # Пробуем найти и закрыть cookie banner
                         self.page.locator('button:has-text("Close")').first.click(timeout=3000)
                         print("✓ Cookie banner закрыт")
+                        time.sleep(2)
                     except:
                         pass
 
@@ -370,7 +438,7 @@ class ZaraPlaywrightInterface:
                 print(f"   Сообщение: {error_msg[:200]}")
                 
                 if attempt < max_retries - 1:
-                    delay = 5 * (attempt + 1)
+                    delay = 10 * (attempt + 1)
                     print(f"⏱️ Ждем {delay} секунд перед следующей попыткой...")
                     time.sleep(delay)
                 else:

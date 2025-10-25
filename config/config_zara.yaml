@@ -1,6 +1,6 @@
-page_loading_time: 3
-request_delay_min: 24
-request_delay_max: 60
+page_loading_time: 5
+request_delay_min: 45
+request_delay_max: 90
 items_limit: 200  # Лимит товаров на категорию
 
 male:
