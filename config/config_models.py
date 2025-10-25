@@ -15,6 +15,8 @@ class Catalog(BaseModel):
 
 class Config(BaseModel):
     page_loading_time: int = Field(..., description="Time to load page before parsing goods")
+    request_delay_min: int = Field(24, description="Minimum delay between requests in seconds")
+    request_delay_max: int = Field(60, description="Maximum delay between requests in seconds")
     male: Catalog = Field(..., description="Male catalog information")
     female: Catalog = Field(..., description="Female catalog information")
 

@@ -12,47 +12,6 @@ from pymongo import MongoClient
 from selenium import webdriver
 
 
-class ProxyManager:
-    """Управление списком прокси с ротацией"""
-    
-    def __init__(self, proxy_file: str = "proxies.txt"):
-        self.proxy_file = proxy_file
-        self.proxies = []
-        self.current_index = 0
-        self.load_proxies()
-    
-    def load_proxies(self):
-        """Загрузить прокси из файла"""
-        try:
-            with open(self.proxy_file, 'r') as f:
-                self.proxies = [
-                    line.strip() 
-                    for line in f 
-                    if line.strip() and not line.strip().startswith('#')
-                ]
-            if self.proxies:
-                print(f"✅ Загружено {len(self.proxies)} прокси")
-            else:
-                print("⚠️ Файл прокси пуст, работаем без прокси")
-        except FileNotFoundError:
-            print(f"⚠️ Файл {self.proxy_file} не найден, работаем без прокси")
-    
-    def get_next_proxy(self):
-        """Получить следующий прокси (ротация по кругу)"""
-        if not self.proxies:
-            return None
-        
-        proxy = self.proxies[self.current_index]
-        self.current_index = (self.current_index + 1) % len(self.proxies)
-        return proxy
-    
-    def get_random_proxy(self):
-        """Получить случайный прокси"""
-        if not self.proxies:
-            return None
-        return random.choice(self.proxies)
-
-
 class MongoInterface:
     def __init__(self, connection_uri: str, database: str = "farfetch_db"):
         self._client = MongoClient(connection_uri)
@@ -141,61 +100,26 @@ class WebDriverInterface:
         return data
 
 
-import time
-from playwright.sync_api import sync_playwright
-
 class PlaywrightInterface:
-    def __init__(self, page_loading_time: int = 3, headless: bool = True, use_proxy: bool = True):
-        self.page_loading_time = page_loading_time
-        self.playwright = sync_playwright().start()
-        self.proxy_manager = ProxyManager() if use_proxy else None
-        self.use_proxy = use_proxy
-        self.current_proxy = None
-        self.failed_proxies = set()
+    def __init__(self, page_loading_time: int = 3, headless: bool = True, request_delay: tuple = (24, 60)):
+        """
+        Инициализация Playwright интерфейса
         
-        # Инициализируем браузер с первым прокси
+        Args:
+            page_loading_time: время ожидания загрузки страницы
+            headless: запускать браузер в headless режиме
+            request_delay: диапазон задержки между запросами в секундах (min, max)
+        """
+        self.page_loading_time = page_loading_time
+        self.request_delay = request_delay
+        self.playwright = sync_playwright().start()
+        
+        # Инициализируем браузер
         self._init_browser(headless)
 
     def _init_browser(self, headless: bool = True):
-        """Инициализация браузера с прокси"""
-        proxy_config = None
-        
-        if self.proxy_manager:
-            proxy_url = self._get_working_proxy()
-            if proxy_url:
-                self.current_proxy = proxy_url
-                # Парсим прокси URL
-                if '@' in proxy_url:
-                    # Формат: protocol://username:password@host:port
-                    protocol = proxy_url.split('://')[0]
-                    creds_and_host = proxy_url.split('://')[1]
-                    creds = creds_and_host.split('@')[0]
-                    host = creds_and_host.split('@')[1]
-                    username, password = creds.split(':')
-                    
-                    proxy_config = {
-                        "server": f"{protocol}://{host}",
-                        "username": username,
-                        "password": password
-                    }
-                else:
-                    # Формат: protocol://host:port
-                    # Пробуем заменить http на https для https-сайтов
-                    if proxy_url.startswith('http://'):
-                        proxy_config = {"server": proxy_url}
-                    else:
-                        proxy_config = {"server": proxy_url}
-                
-                print(f"🔐 Используем прокси: {proxy_config.get('server')}")
-        
-        # Запускаем браузер с прокси
-        if hasattr(self, 'browser') and self.browser:
-            self.browser.close()
-            
-        self.browser = self.playwright.chromium.launch(
-            headless=headless,
-            proxy=proxy_config
-        )
+        """Инициализация браузера"""
+        self.browser = self.playwright.chromium.launch(headless=headless)
         
         # Имитируем реальный браузер
         self.page = self.browser.new_page(user_agent=(
@@ -207,50 +131,16 @@ class PlaywrightInterface:
         # Таймауты
         self.page.set_default_timeout(30000)
         self.page.set_default_navigation_timeout(60000)
-    
-    def _get_working_proxy(self):
-        """Получить рабочий прокси, пропуская неудачные"""
-        if not self.proxy_manager or not self.proxy_manager.proxies:
-            return None
-        
-        attempts = 0
-        max_attempts = len(self.proxy_manager.proxies)
-        
-        while attempts < max_attempts:
-            proxy = self.proxy_manager.get_next_proxy()
-            if proxy not in self.failed_proxies:
-                return proxy
-            attempts += 1
-        
-        # Если все прокси провалились, очищаем список неудач и пробуем снова
-        print("⚠️ Все прокси провалились, сбрасываем список и пробуем снова...")
-        self.failed_proxies.clear()
-        return self.proxy_manager.get_next_proxy()
-    
-    def _switch_proxy(self):
-        """Переключиться на следующий прокси"""
-        if not self.use_proxy or not self.proxy_manager:
-            return False
-        
-        if self.current_proxy:
-            self.failed_proxies.add(self.current_proxy)
-            print(f"❌ Прокси {self.current_proxy} добавлен в черный список")
-        
-        print("🔄 Переключаемся на новый прокси...")
-        self._init_browser()
-        return True
 
     def safe_goto(self, url, add_delay=True):
         """Переход на страницу с retry и обработкой баннеров"""
-        # Случайная задержка перед запросом (против rate limiting)
-        # Только для страниц каталога, не для карточек товаров
-        if add_delay and "items.aspx" in url:
-            delay = random.uniform(1, 2)  # 1-2 секунды для страниц каталога
+        # Случайная задержка перед запросом
+        if add_delay:
+            delay = random.uniform(self.request_delay[0], self.request_delay[1])
             print(f"⏳ Задержка {delay:.1f}s перед запросом...")
             time.sleep(delay)
         
         max_retries = 3
-        proxy_switched = False
         
         for attempt in range(max_retries):
             try:
@@ -258,23 +148,11 @@ class PlaywrightInterface:
                 
                 # Проверяем статус ответа
                 if response and response.status == 429:
-                    print(f"🚫 Rate limit (429)!")
-                    # При 429 пробуем сменить прокси
-                    if not proxy_switched and self._switch_proxy():
-                        proxy_switched = True
-                        print("🔄 Повторяем запрос с новым прокси...")
-                        continue
-                    else:
-                        print(f"⏱️ Ждем 60 секунд...")
-                        time.sleep(60)
-                        return False
+                    print(f"🚫 Rate limit (429)! Ждем 60 секунд...")
+                    time.sleep(60)
+                    continue
                 elif response and response.status >= 400:
                     print(f"⚠️ HTTP ошибка {response.status}")
-                    # При других ошибках тоже пробуем сменить прокси
-                    if not proxy_switched and self._switch_proxy():
-                        proxy_switched = True
-                        print("🔄 Повторяем запрос с новым прокси...")
-                        continue
                     return False
                 
                 # Проверяем, что не произошел редирект на главную или другую страницу
@@ -286,7 +164,7 @@ class PlaywrightInterface:
                 # Проверяем, что страница не пустая и содержит контент
                 self.page.wait_for_selector(
                     '[data-component="PriceCallout"], [data-testid="productCard"], [data-component="PaginationLabel"]',
-                    timeout=15000  # Уменьшен таймаут для быстрого обнаружения пустых страниц
+                    timeout=15000
                 )
 
                 # Закрываем pop-up / куки только при первой загрузке
@@ -299,19 +177,19 @@ class PlaywrightInterface:
 
                 return True
             except Exception as e:
-                print(f"⚠️ Попытка {attempt+1}/{max_retries} не удалась: {type(e).__name__}")
-                
-                # При ошибке соединения пробуем сменить прокси
-                if not proxy_switched and ('TimeoutError' in str(type(e)) or 'NetworkError' in str(type(e))):
-                    if self._switch_proxy():
-                        proxy_switched = True
-                        print("🔄 Повторяем запрос с новым прокси...")
-                        continue
+                error_name = type(e).__name__
+                error_msg = str(e)
+                print(f"⚠️ Попытка {attempt+1}/{max_retries} не удалась:")
+                print(f"   Тип ошибки: {error_name}")
+                print(f"   Сообщение: {error_msg[:200]}")
                 
                 if attempt < max_retries - 1:
-                    time.sleep(3 * (attempt + 1))  # Увеличиваем задержку с каждой попыткой
+                    delay = 5 * (attempt + 1)
+                    print(f"⏱️ Ждем {delay} секунд перед следующей попыткой...")
+                    time.sleep(delay)
                 else:
-                    print(f"❌ Не удалось загрузить: {type(e).__name__}")
+                    print(f"❌ Не удалось загрузить после {max_retries} попыток")
+                    print(f"   Последняя ошибка: {error_name} - {error_msg[:100]}")
         return False
 
     def get_number_of_pages(self, url: str):
@@ -350,10 +228,11 @@ class PlaywrightInterface:
     def parse_elements(self, links, category, gender):
         data = []
         for i, link in enumerate(links):
-            # Небольшая задержка между товарами (0.5-1 сек)
+            # Задержка между товарами (используем request_delay)
             if i > 0:
-                import random
-                time.sleep(random.uniform(0.5, 1))
+                delay = random.uniform(self.request_delay[0], self.request_delay[1])
+                print(f"⏳ Задержка {delay:.1f}s между товарами...")
+                time.sleep(delay)
             
             if not self.safe_goto(link, add_delay=False):
                 continue

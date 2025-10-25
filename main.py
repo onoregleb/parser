@@ -39,8 +39,12 @@ def run_scrapper(config: Config, gender: str):
     print(f"⏰ Timestamp: {__import__('datetime').datetime.now()}", flush=True)
 
     print("🌐 Initializing Playwright browser...", flush=True)
-    driver = PlaywrightInterface(page_loading_time=config.page_loading_time)
+    driver = PlaywrightInterface(
+        page_loading_time=config.page_loading_time,
+        request_delay=(config.request_delay_min, config.request_delay_max)
+    )
     print("✅ Browser initialized", flush=True)
+    print(f"⏱️ Задержка между запросами: {config.request_delay_min}-{config.request_delay_max} секунд", flush=True)
     
     # Используем 'mongo' как имя хоста в Docker, 'localhost' для локального запуска
     import os

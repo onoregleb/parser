@@ -1,4 +1,6 @@
 page_loading_time: 3
+request_delay_min: 24
+request_delay_max: 60
 male:
   url: https://www.farfetch.com/kz/shopping/men/{category}-2/items.aspx
   categories:
