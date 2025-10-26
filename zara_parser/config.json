@@ -1,0 +1,198 @@
+{
+  "site": {
+    "country": "us",
+    "lang": "en",
+    "currency": "USD",
+    "base_url": "https://www.zara.com/us/en"
+  },
+  "parsing": {
+    "items_limit": 50,
+    "request_delay": {
+      "min": 1.0,
+      "max": 2.0
+    },
+    "max_retries": 3
+  },
+  "categories": {
+    "woman": [
+      {
+        "url": "https://www.zara.com/us/en/woman-new-in-l1180.html",
+        "name": "woman-new-in"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-jackets-l1114.html",
+        "name": "woman-jackets"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-outerwear-l1184.html",
+        "name": "woman-coats-trenches"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-outerwear-winter-l4445.html",
+        "name": "woman-technical-puffers"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-cardigans-sweaters-l8322.html",
+        "name": "woman-cardigans-sweaters"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-blazers-l1055.html",
+        "name": "woman-blazers"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-dresses-l1066.html",
+        "name": "woman-dresses-jumpsuits"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-tops-l1322.html",
+        "name": "woman-tops"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-body-l1057.html",
+        "name": "woman-bodysuits"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-co-ords-l1061.html",
+        "name": "woman-co-ord-sets"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-sweatshirts-l1320.html",
+        "name": "woman-sweatshirts-sweatpants"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-knitwear-l1152.html",
+        "name": "woman-knitwear"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-jeans-l1119.html",
+        "name": "woman-jeans"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-trousers-l1335.html",
+        "name": "woman-pants"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-shirts-l1217.html",
+        "name": "woman-shirts"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-tshirts-l1362.html",
+        "name": "woman-t-shirts"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-skirts-l1299.html",
+        "name": "woman-skirts-shorts"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-shoes-l1251.html",
+        "name": "woman-shoes"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-bags-l1024.html",
+        "name": "woman-bags"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-accessories-l1003.html",
+        "name": "woman-accessories-jewelry"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-lingerie-l4021.html",
+        "name": "woman-lingerie"
+      },
+      {
+        "url": "https://www.zara.com/us/en/woman-leather-l1174.html",
+        "name": "woman-leather"
+      }
+    ],
+    "man": [
+      {
+        "url": "https://www.zara.com/us/en/man-new-in-l711.html",
+        "name": "man-new-in"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-jackets-l640.html",
+        "name": "man-jackets"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-outerwear-l715.html",
+        "name": "man-coats-trenches"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-outerwear-vests-l730.html",
+        "name": "man-puffers-vests"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-knitwear-l681.html",
+        "name": "man-sweaters-cardigans"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-shirts-l737.html",
+        "name": "man-shirts"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-trousers-l838.html",
+        "name": "man-pants"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-jeans-l659.html",
+        "name": "man-jeans"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-sweatshirts-l821.html",
+        "name": "man-hoodies-sweatshirts"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-overshirts-l3174.html",
+        "name": "man-overshirts"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-tshirts-l855.html",
+        "name": "man-t-shirts-tank-tops"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-suits-l808.html",
+        "name": "man-suits"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-leather-l704.html",
+        "name": "man-leather"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-jogging-l679.html",
+        "name": "man-sweatsuits"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-total-look-l5490.html",
+        "name": "man-matching-sets"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-polos-l733.html",
+        "name": "man-polo-shirts"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-bermudas-l592.html",
+        "name": "man-shorts-jorts"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-blazers-l608.html",
+        "name": "man-blazers"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-shoes-l769.html",
+        "name": "man-shoes"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-shoes-boots-l781.html",
+        "name": "man-boots"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-bags-l563.html",
+        "name": "man-bags-backpacks"
+      },
+      {
+        "url": "https://www.zara.com/us/en/man-accessories-l537.html",
+        "name": "man-accessories"
+      }
+    ]
+  }
+}

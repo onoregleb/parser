@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  zara-parser:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zara-parser
+    volumes:
+      # Монтируем папку для сохранения результатов парсинга
+      - ./data:/app/data
+      # Монтируем папку для логов
+      - ./logs:/app/logs
+      # Монтируем конфиг (чтобы можно было менять без пересборки)
+      - ./config.json:/app/config.json
+    environment:
+      - ZARA_COUNTRY=us
+      - ZARA_LANG=en 
+      - ZARA_CURRENCY=USD
+      - ZARA_ITEMS_LIMIT=50  # товаров на категорию
+      - ZARA_REQUEST_DELAY_MIN=1.0
+      - ZARA_REQUEST_DELAY_MAX=2.0
+      # Режимы: test, woman, man, full
+      - ZARA_MODE=full
+    restart: unless-stopped
+    
+  # Дополнительный сервис для быстрого тестирования
+  zara-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zara-test
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config.json:/app/config.json
+    environment:
+      - ZARA_COUNTRY=us
+      - ZARA_LANG=en
+      - ZARA_CURRENCY=USD
+      - ZARA_ITEMS_LIMIT=3
+      - ZARA_REQUEST_DELAY_MIN=0.5
+      - ZARA_REQUEST_DELAY_MAX=1.0
+      - ZARA_MODE=test
+    profiles:
+      - test
