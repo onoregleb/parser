@@ -14,121 +14,33 @@ import json
 import time
 import random
 import sys
-import os
 from typing import List, Dict, Optional
 
 
 class ZaraAPIParser:
     """Парсер Zara через API"""
     
-    def __init__(self, config_path: str = "config.json", request_delay: tuple = None, items_limit: int = None):
+    def __init__(self, request_delay: tuple = (0.5, 1.5), items_limit: int = 15):
         """
         Args:
-            config_path: путь к файлу конфигурации
-            request_delay: задержка между запросами (min, max) в секундах (переопределяет конфиг)
-            items_limit: сколько товаров парсить (переопределяет конфиг)
+            request_delay: задержка между запросами (min, max) в секундах
+            items_limit: сколько товаров парсить (None = все)
         """
-        # Загружаем конфигурацию
-        self.config = self.load_config(config_path)
-        
-        # Устанавливаем параметры парсинга
-        if request_delay:
         self.request_delay = request_delay
-        else:
-            self.request_delay = (
-                self.config["parsing"]["request_delay"]["min"],
-                self.config["parsing"]["request_delay"]["max"]
-            )
-            
-        if items_limit is not None:
         self.items_limit = items_limit
-        else:
-            self.items_limit = self.config["parsing"]["items_limit"]
-            
-        # Настройки сайта
-        self.country = self.config["site"]["country"]
-        self.lang = self.config["site"]["lang"]
-        self.currency = self.config["site"]["currency"]
-        self.base_url = self.config["site"]["base_url"]
-        
         self.session = requests.Session()
         
-        # Улучшенные headers для обхода защиты
+        # User-Agent для имитации браузера
         self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'en-US,en;q=0.9',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Connection': 'keep-alive',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin',
-            'Sec-Ch-Ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-            'Sec-Ch-Ua-Mobile': '?0',
-            'Sec-Ch-Ua-Platform': '"macOS"',
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache',
-            'Referer': f'https://www.zara.com/{self.country}/{self.lang}/',
-            'Origin': f'https://www.zara.com',
+            'Referer': 'https://www.zara.com/',
         })
-
-    def load_config(self, config_path: str) -> Dict:
-        """Загружает конфигурацию из файла или переменных окружения"""
-        # Пытаемся загрузить из файла
-        if os.path.exists(config_path):
-            with open(config_path, 'r', encoding='utf-8') as f:
-                config = json.load(f)
-        else:
-            # Дефолтная конфигурация
-            config = {
-                "site": {
-                    "country": "us",
-                    "lang": "en", 
-                    "currency": "USD",
-                    "base_url": "https://www.zara.com/us/en"
-                },
-                "parsing": {
-                    "items_limit": 50,
-                    "request_delay": {"min": 1.0, "max": 2.0},
-                    "max_retries": 3
-                }
-            }
-        
-        # Переопределяем из переменных окружения
-        if os.getenv('ZARA_COUNTRY'):
-            config["site"]["country"] = os.getenv('ZARA_COUNTRY')
-        if os.getenv('ZARA_LANG'):
-            config["site"]["lang"] = os.getenv('ZARA_LANG')
-        if os.getenv('ZARA_CURRENCY'):
-            config["site"]["currency"] = os.getenv('ZARA_CURRENCY')
-        if os.getenv('ZARA_ITEMS_LIMIT'):
-            config["parsing"]["items_limit"] = int(os.getenv('ZARA_ITEMS_LIMIT'))
-        if os.getenv('ZARA_REQUEST_DELAY_MIN'):
-            config["parsing"]["request_delay"]["min"] = float(os.getenv('ZARA_REQUEST_DELAY_MIN'))
-        if os.getenv('ZARA_REQUEST_DELAY_MAX'):
-            config["parsing"]["request_delay"]["max"] = float(os.getenv('ZARA_REQUEST_DELAY_MAX'))
-            
-        # Обновляем base_url
-        config["site"]["base_url"] = f"https://www.zara.com/{config['site']['country']}/{config['site']['lang']}"
-        
-        return config
-
-    def _warmup_session(self):
-        """Прогреваем сессию - заходим на главную страницу как реальный пользователь"""
-        try:
-            print("[INFO] Прогрев сессии...")
-            main_page = f"https://www.zara.com/{self.country}/{self.lang}/"
-            response = self.session.get(main_page, timeout=10)  
-            response.raise_for_status()
-            print("[OK] Сессия прогрета")
-            time.sleep(random.uniform(2, 4))  # Задержка как у реального пользователя
-        except Exception as e:
-            print(f"[WARNING] Не удалось прогреть сессию: {e}")
         
     def _delay(self):
         """Случайная задержка между запросами"""
         delay = random.uniform(self.request_delay[0], self.request_delay[1])
-        print(f"[PAUSE] Задержка {delay:.1f}с...")
         time.sleep(delay)
 
     def _retry_request(self, func, max_retries: int = 3, *args, **kwargs):
@@ -149,8 +61,8 @@ class ZaraAPIParser:
         Получает список товаров из категории через API
 
         Args:
-            country: код страны (например, 'us')
-            lang: код языка (например, 'en')
+            country: код страны (например, 'kz', 'us', 'ru')
+            lang: код языка (например, 'en', 'ru')
             category_id: ID категории (берется из URL)
 
         Returns:
@@ -158,18 +70,10 @@ class ZaraAPIParser:
         """
         print(f"\nПоиск товаров из категории {category_id}...")
 
-        # Добавляем случайную задержку перед запросом
-        self._delay()
-        
-        # Сначала получаем информацию о категории для получения правильного categoryId
+        # Сначала получаем информацию о категории для получения categoryId
         categories_url = f"https://www.zara.com/{country}/{lang}/categories"
         
         def _get_category_info():
-            # Обновляем Referer для каждого запроса
-            self.session.headers.update({
-                'Referer': f'https://www.zara.com/{country}/{lang}/'
-            })
-            
             params = {
                 'categorySeoId': category_id,
                 'ajax': 'true'
@@ -179,11 +83,6 @@ class ZaraAPIParser:
             return response.json()
 
         def _get_products(real_category_id):
-            # Обновляем Referer
-            self.session.headers.update({
-                'Referer': f'https://www.zara.com/{country}/{lang}/category/{real_category_id}.html'
-            })
-            
             # API эндпоинт для получения товаров категории
             api_url = f"https://www.zara.com/{country}/{lang}/category/{real_category_id}/products"
             params = {'ajax': 'true'}
@@ -195,45 +94,16 @@ class ZaraAPIParser:
             # Получаем информацию о категории
             category_info = self._retry_request(_get_category_info)
             
-            # Ищем подкатегорию с товарами
+            # Извлекаем реальный categoryId
             real_category_id = None
-            
             if 'categories' in category_info and category_info['categories']:
-                main_category = category_info['categories'][0]
-                
-                # Ищем в подкатегориях ту, что содержит товары
-                def find_products_category(category):
-                    # Проверяем текущую категорию
-                    if category.get('layout') == 'products-category-view' and category.get('seo', {}).get('seoCategoryId'):
-                        return category.get('seo', {}).get('seoCategoryId')
-                    
-                    # Ищем в подкатегориях
-                    for subcategory in category.get('subcategories', []):
-                        if subcategory.get('layout') == 'products-category-view' and subcategory.get('seo', {}).get('seoCategoryId'):
-                            return subcategory.get('seo', {}).get('seoCategoryId')
-                        
-                        # Рекурсивно ищем глубже
-                        result = find_products_category(subcategory)
-                        if result:
-                            return result
-                    
-                    return None
-                
-                real_category_id = find_products_category(main_category)
-                
-                # Если не нашли, используем основной ID
-                if not real_category_id:
-                    real_category_id = main_category.get('id')
+                real_category_id = category_info['categories'][0].get('id')
             
             if not real_category_id:
                 print(f"[ERROR] Не удалось получить реальный ID категории для {category_id}")
-                print(f"[DEBUG] Ответ API: {str(category_info)[:500]}...")
                 return []
                 
             print(f"[INFO] Реальный ID категории: {real_category_id}")
-            
-            # Добавляем задержку перед запросом товаров
-            self._delay()
             
             # Получаем товары
             data = self._retry_request(lambda: _get_products(real_category_id))
@@ -260,17 +130,16 @@ class ZaraAPIParser:
             print(f"[OK] Найдено {len(all_products)} товаров")
 
             # Ограничиваем количество если нужно
-            if self.items_limit:
+            if self.items_limit is not None:
                 all_products = all_products[:self.items_limit]
                 print(f"[INFO] Ограничено до {len(all_products)} товаров")
+            else:
+                print(f"[INFO] Получено {len(all_products)} товаров (без ограничения)")
 
             return all_products
 
         except Exception as e:
             print(f"[ERROR] Ошибка получения товаров: {e}")
-            if hasattr(e, 'response') and e.response is not None:
-                print(f"[ERROR] HTTP статус: {e.response.status_code}")
-                print(f"[ERROR] Ответ: {e.response.text[:500]}...")
             return []
     
     def get_product_details(self, country: str, lang: str, product_id: int) -> Optional[Dict]:
@@ -379,7 +248,7 @@ class ZaraAPIParser:
                 'reference': reference,
                 'display_reference': display_reference,
                 'price': price,
-                'currency': self.currency,
+                'currency': 'USD',  # Для США
                 'section': section_name,
                 'family': family_name,
                 'color': color_info.get('name', ''),
@@ -400,7 +269,7 @@ class ZaraAPIParser:
         Парсит всю категорию
         
         Args:
-            category_url: URL категории (например, https://www.zara.com/us/en/woman-jackets-l1114.html)
+            category_url: URL категории (например, https://www.zara.com/kz/en/man-jackets-l640.html?v1=2536906)
             category_name: название категории для идентификации
         
         Returns:
@@ -411,24 +280,20 @@ class ZaraAPIParser:
         print(f"[URL] {category_url}")
         print(f"{'='*70}\n")
         
-        # Прогреваем сессию перед началом парсинга
-        self._warmup_session()
-        
         # Извлекаем параметры из URL
-        # Формат: https://www.zara.com/{country}/{lang}/woman-jackets-l{category_id}.html
+        # Формат: https://www.zara.com/{country}/{lang}/man-jackets-l{category_id}.html?v1={version}
         try:
             parts = category_url.replace('https://www.zara.com/', '').split('/')
-            country = parts[0]  # us
+            country = parts[0]  # kz
             lang = parts[1]     # en
             
-            # Извлекаем category_id из части URL (например, "woman-jackets-l1114.html" -> "1114")
-            category_part = parts[2]  # woman-jackets-l1114.html
-            category_id = category_part.split('-l')[1].split('.')[0]  # 1114
+            # Извлекаем category_id из части URL (например, "man-jackets-l640.html" -> "640")
+            category_part = parts[2]  # man-jackets-l640.html
+            category_id = category_part.split('-l')[1].split('.')[0]  # 640
             
-            # Можно также получить из параметра v1 если есть
+            # Можно также получить из параметра v1
             if '?v1=' in category_url:
-                v1_id = category_url.split('?v1=')[1].split('&')[0]
-                print(f"[INFO] Найден параметр v1: {v1_id}")
+                category_id = category_url.split('?v1=')[1].split('&')[0]
             
             print(f"[INFO] Страна: {country}, Язык: {lang}, ID категории: {category_id}")
 
@@ -452,7 +317,7 @@ class ZaraAPIParser:
         for i, product_data in enumerate(products, 1):
             print(f"\n[{i}/{len(products)}] Парсинг товара...")
             
-            # Добавляем задержку между товарами
+            # Добавляем задержку между запросами (кроме первого)
             if i > 1:
                 self._delay()
             
@@ -462,11 +327,11 @@ class ZaraAPIParser:
                 parsed['category'] = category_name
                 parsed_products.append(parsed)
                 print(f"[OK] {parsed['name']}")
-                print(f"   Цена: ${parsed['price']} {parsed['currency']}")
+                print(f"   Цена: {parsed['price']} {parsed['currency']}")
                 print(f"   Цвет: {parsed['color']}")
                 print(f"   URL: {parsed['url'][:80]}...")
             else:
-                print(f"[WARNING] Ошибка парсинга товара")
+                print(f"[WARNING] Ошибка парсинга")
 
         print(f"\n{'='*70}")
         print(f"[SUCCESS] ЗАВЕРШЕНО: Спарсено {len(parsed_products)} товаров")
@@ -523,37 +388,74 @@ def load_progress() -> tuple:
 # MAIN - Пример использования
 # ==============================================================================
 
-def get_zara_categories(config: Dict, mode: str = "full") -> List[Dict]:
-    """
-    Возвращает список категорий для парсинга в зависимости от режима
+def get_zara_categories():
+    """Список категорий Zara US (английский сайт с ценами в долларах)"""
+    return [
+        # ЖЕНСКИЕ КАТЕГОРИИ
+        {"url": "https://www.zara.com/us/en/woman-jackets-l1114.html", "name": "woman-jackets"},
+        {"url": "https://www.zara.com/us/en/woman-outerwear-l1184.html", "name": "woman-outerwear"},
+        {"url": "https://www.zara.com/us/en/woman-outerwear-winter-l4445.html", "name": "woman-winter"},
+        {"url": "https://www.zara.com/us/en/woman-blazers-l1055.html", "name": "woman-blazers"},
+        {"url": "https://www.zara.com/us/en/woman-cardigans-sweaters-l8322.html", "name": "woman-sweaters"},
+        {"url": "https://www.zara.com/us/en/woman-dresses-l1066.html", "name": "woman-dresses"},
+        {"url": "https://www.zara.com/us/en/woman-tops-l1322.html", "name": "woman-tops"},
+        {"url": "https://www.zara.com/us/en/woman-bodysuits-l1057.html", "name": "woman-bodysuits"},
+        {"url": "https://www.zara.com/us/en/woman-jeans-l1119.html", "name": "woman-jeans"},
+        {"url": "https://www.zara.com/us/en/woman-trousers-l1335.html", "name": "woman-trousers"},
+        {"url": "https://www.zara.com/us/en/woman-t-shirts-l1362.html", "name": "woman-t-shirts"},
+        {"url": "https://www.zara.com/us/en/woman-shirts-l1217.html", "name": "woman-shirts"},
+        {"url": "https://www.zara.com/us/en/woman-knitwear-l1152.html", "name": "woman-knitwear"},
+        {"url": "https://www.zara.com/us/en/woman-leather-l1174.html", "name": "woman-leather"},
+        {"url": "https://www.zara.com/us/en/woman-sweatshirts-l1320.html", "name": "woman-sweatshirts"},
+        {"url": "https://www.zara.com/us/en/woman-skirts-shorts-l1299.html", "name": "woman-skirts-shorts"},
+        {"url": "https://www.zara.com/us/en/woman-shoes-l1251.html", "name": "woman-shoes"},
+        {"url": "https://www.zara.com/us/en/woman-bags-l1024.html", "name": "woman-bags"},
+        {"url": "https://www.zara.com/us/en/woman-accessories-l1003.html", "name": "woman-accessories"},
+        {"url": "https://www.zara.com/us/en/woman-lingerie-l4021.html", "name": "woman-lingerie"},
+        {"url": "https://www.zara.com/us/en/woman-perfumes-l1415.html", "name": "woman-perfumes"},
+        {"url": "https://www.zara.com/us/en/woman-special-prices-l1314.html", "name": "woman-sale"},
+
+        # МУЖСКИЕ КАТЕГОРИИ
+        {"url": "https://www.zara.com/us/en/man-jackets-l640.html", "name": "man-jackets"},
+        {"url": "https://www.zara.com/us/en/man-outerwear-l730.html", "name": "man-outerwear"},
+        {"url": "https://www.zara.com/us/en/man-coats-l715.html", "name": "man-coats"},
+        {"url": "https://www.zara.com/us/en/man-leather-l704.html", "name": "man-leather"},
+        {"url": "https://www.zara.com/us/en/man-trousers-l838.html", "name": "man-trousers"},
+        {"url": "https://www.zara.com/us/en/man-jeans-l659.html", "name": "man-jeans"},
+        {"url": "https://www.zara.com/us/en/man-t-shirts-l855.html", "name": "man-t-shirts"},
+        {"url": "https://www.zara.com/us/en/man-shirts-l737.html", "name": "man-shirts"},
+        {"url": "https://www.zara.com/us/en/man-sweatshirts-l821.html", "name": "man-sweatshirts"},
+        {"url": "https://www.zara.com/us/en/man-knitwear-l681.html", "name": "man-knitwear"},
+        {"url": "https://www.zara.com/us/en/man-sportswear-l679.html", "name": "man-sportswear"},
+        {"url": "https://www.zara.com/us/en/man-suits-l808.html", "name": "man-suits"},
+        {"url": "https://www.zara.com/us/en/man-polo-l733.html", "name": "man-polo"},
+        {"url": "https://www.zara.com/us/en/man-overshirts-l3174.html", "name": "man-overshirts"},
+        {"url": "https://www.zara.com/us/en/man-blazers-l608.html", "name": "man-blazers"},
+        {"url": "https://www.zara.com/us/en/man-sneakers-l7460.html", "name": "man-sneakers"},
+        {"url": "https://www.zara.com/us/en/man-shoes-l769.html", "name": "man-shoes"},
+        {"url": "https://www.zara.com/us/en/man-bags-l563.html", "name": "man-bags"},
+        {"url": "https://www.zara.com/us/en/man-accessories-l537.html", "name": "man-accessories"},
+        {"url": "https://www.zara.com/us/en/man-special-prices-l806.html", "name": "man-sale"},
+
+        # ДЕТСКИЕ КАТЕГОРИИ
+        {"url": "https://www.zara.com/us/en/kids-preteen-l16492.html", "name": "kids-preteen"},
+        {"url": "https://www.zara.com/us/en/kids-halloween-l2316.html", "name": "kids-halloween"},
+        {"url": "https://www.zara.com/us/en/kids-accessories-perfumes-l5951.html", "name": "kids-accessories"},
+        {"url": "https://www.zara.com/us/en/zara-50-anniversary-collection-l15655.html", "name": "50th-anniversary"}
+    ]
+
+
+def get_adult_categories_only():
+    """Возвращает только мужские и женские категории (исключая детские)"""
+    all_categories = get_zara_categories()
+    adult_categories = []
     
-    Args:
-        config: конфигурация с категориями
-        mode: режим парсинга (test, woman, man, full)
+    for category in all_categories:
+        # Исключаем детские категории и специальные коллекции
+        if not any(keyword in category['name'] for keyword in ['kids', '50th-anniversary']):
+            adult_categories.append(category)
     
-    Returns:
-        Список категорий для парсинга
-    """
-    categories = []
-    
-    if mode == "test":
-        # Для тестирования берем по 2 категории каждой группы
-        if "woman" in config.get("categories", {}):
-            categories.extend(config["categories"]["woman"][:2])
-        if "man" in config.get("categories", {}):
-            categories.extend(config["categories"]["man"][:2])
-    elif mode == "woman":
-        categories = config.get("categories", {}).get("woman", [])
-    elif mode == "man":
-        categories = config.get("categories", {}).get("man", [])
-    elif mode == "full":
-        # Все категории
-        if "woman" in config.get("categories", {}):
-            categories.extend(config["categories"]["woman"])
-        if "man" in config.get("categories", {}):
-            categories.extend(config["categories"]["man"])
-    
-    return categories
+    return adult_categories
 
 
 def parse_multiple_categories(categories: List[Dict], products_per_category: int = 10, resume: bool = False) -> List[Dict]:
@@ -569,13 +471,13 @@ def parse_multiple_categories(categories: List[Dict], products_per_category: int
         Список всех спарсенных товаров
     """
     print("="*80)
-    print("ZARA MULTI-CATEGORY PARSER")
+    print("ZARA MULTI-CATEGORY PARSER - Парсер 45 категорий")
     print("="*80)
 
-    # Создаем парсер с ограничением товаров
+    # Создаем парсер
     parser = ZaraAPIParser(
         request_delay=(1.0, 2.0),   # Увеличенная задержка для множества категорий
-        items_limit=products_per_category
+        items_limit=products_per_category  # None = без ограничения
     )
 
     all_products = []
@@ -642,85 +544,103 @@ def parse_multiple_categories(categories: List[Dict], products_per_category: int
     return all_products
 
 
-if __name__ == "__main__":
+def parse_adult_products_only(products_per_category: int = 15, resume: bool = False):
+    """
+    Парсит только товары для мужчин и женщин (исключая детские)
+    
+    Args:
+        products_per_category: количество товаров на категорию
+        resume: продолжить с сохраненного прогресса
+    
+    Returns:
+        Список всех спарсенных товаров для взрослых
+    """
     print("="*80)
-    print("ZARA API PARSER - Английский сайт с долларами")
+    print("ZARA US PARSER - ТОВАРЫ ДЛЯ МУЖЧИН И ЖЕНЩИН (USD)")
     print("="*80)
     
-    # Определяем режим работы
-    mode = os.getenv('ZARA_MODE', 'full')
-    resume = '--resume' in sys.argv or '-r' in sys.argv
+    # Получаем только мужские и женские категории
+    adult_categories = get_adult_categories_only()
     
-    # Создаем парсер с загрузкой конфигурации
-    parser = ZaraAPIParser()
+    print(f"[INFO] Найдено {len(adult_categories)} категорий для взрослых")
+    print(f"[INFO] Мужских категорий: {len([c for c in adult_categories if 'man-' in c['name']])}")
+    print(f"[INFO] Женских категорий: {len([c for c in adult_categories if 'woman-' in c['name']])}")
     
-    # Получаем категории для парсинга
-    categories = get_zara_categories(parser.config, mode)
+        # Парсим категории (без ограничения количества товаров)
+    all_products = parse_multiple_categories(adult_categories, None, resume)
     
-    if not categories:
-        print("[ERROR] Нет категорий для парсинга")
-        print("[INFO] Проверьте файл config.json или переменную ZARA_MODE")
-        sys.exit(1)
-    
-    print(f"[MODE] Режим: {mode.upper()}")
-    print(f"[SITE] Сайт: {parser.base_url}")
-    print(f"[CURRENCY] Валюта: {parser.currency}")
-    print(f"[CATEGORIES] Найдено {len(categories)} категорий для парсинга")
-    print(f"[ITEMS] Товаров на категорию: {parser.items_limit}")
-    
-    if mode == "test":
-        print("\n" + "="*60)
-        print("ТЕСТОВЫЙ РЕЖИМ")
-        print("="*60)
+    return all_products
 
+
+if __name__ == "__main__":
+    # Проверяем аргументы командной строки
+    resume = '--resume' in sys.argv or '-r' in sys.argv
+    test_mode = '--test' in sys.argv or '-t' in sys.argv
+    adults_only = '--adults' in sys.argv or '-a' in sys.argv or True  # По умолчанию только взрослые
+
+    if test_mode:
+        print("ТЕСТОВЫЙ РЕЖИМ: Парсинг первых 3 взрослых категорий")
+        print("="*60)
+        # Берем только первые 3 взрослые категории для теста
+        test_categories = get_adult_categories_only()[:3]
+
+        # Тестовый парсер
+        test_parser = ZaraAPIParser(request_delay=(0.5, 1.0), items_limit=None)
         all_products = []
-        for category in categories:
+
+        for category in test_categories:
             print(f"\n[TEST] Тестируем категорию: {category['name']}")
-            products = parser.parse_category(category['url'], category['name'])
+            products = test_parser.parse_category(category['url'], category['name'])
             if products:
                 all_products.extend(products)
                 print(f"[OK] {len(products)} товаров получено")
 
         if all_products:
-            filename = f"zara_test_{mode}.json"
-            save_to_json(all_products, filename)
+            save_to_json(all_products, "zara_us_adults_test.json")
             print(f"\n[SUCCESS] Тест завершен! Получено {len(all_products)} товаров")
-            print(f"[SAVE] Результаты сохранены в {filename}")
+            print("[SAVE] Результаты сохранены в zara_us_adults_test.json")
         else:
             print("\n[FAILED] Тест провален - товары не получены")
+
+    elif adults_only:
+        # Парсим только товары для взрослых
+        if resume:
+            print("[RESUME] Режим возобновления: продолжаем с сохраненного прогресса")
+            all_products = parse_adult_products_only(products_per_category=None, resume=True)
+        else:
+            print("[NEW] Режим с нуля: начинаем парсинг товаров для взрослых")
+            all_products = parse_adult_products_only(products_per_category=None, resume=False)
     else:
-        print("\n" + "="*60)
-        print("ПОЛНЫЙ ПАРСИНГ")
-        print("="*60)
+        # Получаем список всех категорий (включая детские)
+        categories = get_zara_categories()
         
         if resume:
-            print("[RESUME] Продолжаем с сохраненного прогресса")
-            all_products = parse_multiple_categories(categories, products_per_category=parser.items_limit, resume=True)
+            print("[INFO] Найдено 45 категорий для парсинга")
+            print("[RESUME] Режим возобновления: продолжаем с сохраненного прогресса")
+            # Парсим все категории по 10 товаров каждая с возобновлением
+            all_products = parse_multiple_categories(categories, products_per_category=10, resume=True)
         else:
-            print("[NEW] Начинаем парсинг с начала")
-            all_products = parse_multiple_categories(categories, products_per_category=parser.items_limit, resume=False)
+            print("[INFO] Найдено 45 категорий для парсинга")
+            print("[NEW] Режим с нуля: начинаем парсинг с первой категории")
+            # Парсим все категории по 10 товаров каждая с начала
+            all_products = parse_multiple_categories(categories, products_per_category=10, resume=False)
 
-    # Сохраняем результат (если не тестовый режим)
-    if mode != "test" and all_products:
-        # Определяем имя основного файла
-        main_filename = f"zara_{mode}_{parser.currency.lower()}.json"
-        save_to_json(all_products, main_filename)
+    # Сохраняем результат
+    if all_products:
+        # Сохраняем все товары в один файл
+        save_to_json(all_products, "zara_us_all_categories.json")
 
         # Сохраняем по категориям в отдельные файлы
-        data_dir = os.getenv('ZARA_DATA_DIR', './data')
-        os.makedirs(data_dir, exist_ok=True)
-        
         for category_name in set(p['category'] for p in all_products):
             category_products = [p for p in all_products if p['category'] == category_name]
             if category_products:
-                filename = os.path.join(data_dir, f"zara_{category_name}_{parser.currency.lower()}.json")
+                filename = f"zara_us_{category_name}.json"
                 save_to_json(category_products, filename)
 
-        print(f"""
+        print("""
 [SAVE] Данные сохранены:
-   [MAIN] Основной файл: {main_filename}
-   [CATS] По категориям в папке: {data_dir}/
-   [CURRENCY] Цены в валюте: {parser.currency}""")
+   [FILE] Общий файл: zara_us_all_categories.json
+   [FOLDER] По категориям: zara_us_[название_категории].json""")
 
         # Показываем примеры товаров
         print(f"\n[EXAMPLES] ПРИМЕРЫ ТОВАРОВ:")
@@ -728,16 +648,14 @@ if __name__ == "__main__":
         for i, product in enumerate(all_products[:3], 1):
             print(f"\n{i}. {product['name']}")
             print(f"   [CAT] Категория: {product['category']}")
-            print(f"   [PRICE] Цена: ${product['price']} {product['currency']}")
+            print(f"   [PRICE] Цена: {product['price']} {product['currency']}")
             print(f"   [COLOR] Цвет: {product['color']}")
             print(f"   [URL] URL: {product['url'][:60]}...")
-    
-    elif not all_products:
+    else:
         print("\n[ERROR] Не удалось собрать товары ни из одной категории")
         print("[INFO] Возможные причины:")
         print("   - API Zara недоступен")
         print("   - Изменились URL категорий")
         print("   - Проблемы с интернет-соединением")
         print("   - Сайт блокирует запросы")
-        print(f"   - Проверьте конфигурацию для {parser.base_url}")
 

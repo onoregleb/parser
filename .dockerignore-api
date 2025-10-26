@@ -1,0 +1,91 @@
+# Docker игнорирует эти файлы при сборке образа для api_en.py
+
+# Документация
+*.md
+README*
+docs/
+*.txt
+!requirements-api.txt
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Виртуальные окружения
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Временные файлы
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Логи и данные
+*.log
+*.json
+output/
+logs/
+data/
+
+# Git
+.git/
+.gitignore
+
+# Docker файлы (кроме нужного)
+Dockerfile
+Dockerfile.*
+!Dockerfile.api_en
+docker-compose*.yaml
+docker-compose*.yml
+!docker-compose-api.yml
+
+# Ненужные Python файлы для api_en
+main.py
+main_zara.py
+zara_api_parser.py
+zara_colab_simple.py
+config/
+scripts/
+*.json
+!zara_parser/api_en.py
+
+# MongoDB и другие сервисы
+mongo*
+female_collection.json
+male_collection.json
+
+# Прочие файлы проекта
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,46 +1,69 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  zara-parser:
+  zara-api-parser:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: zara-parser
-    volumes:
-      # Монтируем папку для сохранения результатов парсинга
-      - ./data:/app/data
-      # Монтируем папку для логов
-      - ./logs:/app/logs
-      # Монтируем конфиг (чтобы можно было менять без пересборки)
-      - ./config.json:/app/config.json
-    environment:
-      - ZARA_COUNTRY=us
-      - ZARA_LANG=en 
-      - ZARA_CURRENCY=USD
-      - ZARA_ITEMS_LIMIT=20  # товаров на категорию (уменьшено для надежности)
-      - ZARA_REQUEST_DELAY_MIN=2.0  # увеличены задержки
-      - ZARA_REQUEST_DELAY_MAX=4.0
-      # Режимы: test, woman, man, full
-      - ZARA_MODE=full
+    container_name: zara-api-parser
     restart: unless-stopped
-    
-  # Дополнительный сервис для быстрого тестирования
-  zara-test:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: zara-test
-    volumes:
-      - ./data:/app/data
-      - ./logs:/app/logs
-      - ./config.json:/app/config.json
     environment:
-      - ZARA_COUNTRY=us
-      - ZARA_LANG=en
-      - ZARA_CURRENCY=USD
-      - ZARA_ITEMS_LIMIT=3
-      - ZARA_REQUEST_DELAY_MIN=1.0  # увеличили и для теста
-      - ZARA_REQUEST_DELAY_MAX=2.0
-      - ZARA_MODE=test
+      - PYTHONUNBUFFERED=1
+      - TZ=UTC
+    volumes:
+      # Монтируем директории для сохранения данных и логов
+      - ./output:/app/output
+      - ./logs:/app/logs
+      # Монтируем директорию где будут сохраняться JSON файлы из api_en.py
+      - .:/app/data
+    command: >
+      sh -c "
+        echo 'Запуск Zara API парсера...' &&
+        echo 'Время запуска: $(date)' &&
+        python -u api_en.py --adults 2>&1 | tee /app/logs/parser_$(date +%%Y%%m%%d_%%H%%M%%S).log
+      "
+    working_dir: /app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    # Ограничиваем ресурсы для экономии на AWS
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    # Healthcheck для мониторинга
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -f api_en.py > /dev/null || exit 1"]
+      interval: 60s
+      timeout: 30s
+      retries: 3
+      start_period: 10s
+    networks:
+      - zara-network
+
+  # Опциональный сервис для мониторинга логов через веб-интерфейс
+  log-viewer:
+    image: amir20/dozzle:latest
+    container_name: zara-log-viewer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DOZZLE_NO_ANALYTICS=true
+      - DOZZLE_LEVEL=info
+    networks:
+      - zara-network
     profiles:
-      - test
+      - monitoring  # Запускается только с профилем monitoring
+
+networks:
+  zara-network:
+    driver: bridge
