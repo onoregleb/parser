@@ -6,12 +6,12 @@
     "base_url": "https://www.zara.com/us/en"
   },
   "parsing": {
-    "items_limit": 50,
+    "items_limit": 20,
     "request_delay": {
-      "min": 1.0,
-      "max": 2.0
+      "min": 2.0,
+      "max": 4.0
     },
-    "max_retries": 3
+    "max_retries": 5
   },
   "categories": {
     "woman": [

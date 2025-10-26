@@ -17,9 +17,9 @@ services:
       - ZARA_COUNTRY=us
       - ZARA_LANG=en 
       - ZARA_CURRENCY=USD
-      - ZARA_ITEMS_LIMIT=50  # товаров на категорию
-      - ZARA_REQUEST_DELAY_MIN=1.0
-      - ZARA_REQUEST_DELAY_MAX=2.0
+      - ZARA_ITEMS_LIMIT=20  # товаров на категорию (уменьшено для надежности)
+      - ZARA_REQUEST_DELAY_MIN=2.0  # увеличены задержки
+      - ZARA_REQUEST_DELAY_MAX=4.0
       # Режимы: test, woman, man, full
       - ZARA_MODE=full
     restart: unless-stopped
@@ -39,8 +39,8 @@ services:
       - ZARA_LANG=en
       - ZARA_CURRENCY=USD
       - ZARA_ITEMS_LIMIT=3
-      - ZARA_REQUEST_DELAY_MIN=0.5
-      - ZARA_REQUEST_DELAY_MAX=1.0
+      - ZARA_REQUEST_DELAY_MIN=1.0  # увеличили и для теста
+      - ZARA_REQUEST_DELAY_MAX=2.0
       - ZARA_MODE=test
     profiles:
       - test
